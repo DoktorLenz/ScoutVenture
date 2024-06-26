@@ -129,7 +129,7 @@ jobs:
         run: npm run ci:test
 
       - name: Upload converage reports to Codecov
-        uses: codecov/codecov-action@ab904c41d6ece82784817410c45d8b8c02684457 # v3
+        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ github.workspace }}/angular/coverage/cobertura/cobertura-coverage.xml
@@ -205,7 +205,7 @@ jobs:
         run: mvn jacoco:prepare-agent surefire:test jacoco:report org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@ab904c41d6ece82784817410c45d8b8c02684457 # v3
+        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ github.workspace }}/spring/target/site/jacoco/jacoco.xml
@@ -250,7 +250,7 @@ jobs:
         run: mvn jacoco:prepare-agent-integration failsafe:integration-test jacoco:report-integration
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@ab904c41d6ece82784817410c45d8b8c02684457 # v3
+        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ github.workspace }}/spring/target/site/jacoco-it/jacoco.xml
