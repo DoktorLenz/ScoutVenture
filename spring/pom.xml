@@ -34,7 +34,7 @@
         <org.jsoup.version>1.18.1</org.jsoup.version>
         <org.hamcrest.version>3.0</org.hamcrest.version>
         <io.rest-assured.version>5.5.0</io.rest-assured.version>
-        <org.surefire.plugin.version>3.4.0</org.surefire.plugin.version>
+        <org.surefire.plugin.version>3.5.1</org.surefire.plugin.version>
         <org.failsafe.plugin.version>3.4.0</org.failsafe.plugin.version>
         <org.springframework.cloud.wiremock.version>4.1.4</org.springframework.cloud.wiremock.version>
 
