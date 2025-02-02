@@ -15,13 +15,19 @@
       </div>
     </ng-template>
     <ng-template #footer>
-      <div class="w-full flex" fluid>
+      <div
+        class="w-full flex flex-row align-items-center justify-content-between"
+        fluid
+      >
         <p-button label="Anmelden"></p-button>
+        <a class="primary-link" routerLink="auth/register">
+          Jetzt registrieren
+        </a>
       </div>
     </ng-template>
   </p-card>
-  <div class="flex gap-4">
-    <a class="footer-link" routerLink="/imprint">Impressum</a>
-    <a class="footer-link" routerLink="/privacy-policy">Datenschutz</a>
+  <div class="flex gap-4 mt-1">
+    <a class="secondary-link" routerLink="/imprint">Impressum</a>
+    <a class="secondary-link" routerLink="/privacy-policy"> Datenschutz </a>
   </div>
 </div>
