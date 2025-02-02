@@ -1,35 +1,66 @@
 <div class="flex flex-column justify-content-center align-items-center">
-  <p-card class="w-full md:w-25rem">
-    <ng-template #title>ScoutVenture</ng-template>
-    <ng-template #subtitle>Neues Konto erstellen</ng-template>
-    <ng-template #content>
-      <div class="flex flex-column gap-2">
-        <p-floatlabel variant="on">
-          <label for="username">E-Mail</label>
-          <input pInputText id="username" type="text" fluid />
-        </p-floatlabel>
-        <p-floatlabel variant="on">
-          <label for="password">Passwort</label>
-          <input pInputText id="password" type="text" fluid />
-        </p-floatlabel>
-        <p-floatlabel variant="on">
-          <label for="password">Passwort wiederholen</label>
-          <input pInputText id="password" type="text" fluid />
-        </p-floatlabel>
-      </div>
-    </ng-template>
-    <ng-template #footer>
-      <div
-        class="w-full flex flex-row align-items-center justify-content-between"
-        fluid
-      >
-        <p-button label="Konto erstellen"></p-button
-        ><a class="primary-link" routerLink="/auth/login">
-          Du hast schon ein Konto?
-        </a>
-      </div>
-    </ng-template>
-  </p-card>
+  <form
+    class="w-full md:w-25rem"
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <p-card>
+      <ng-template #title>ScoutVenture</ng-template>
+      <ng-template #subtitle>Neues Konto erstellen</ng-template>
+      <ng-template #content>
+        <div class="flex flex-column gap-2">
+          <p-floatlabel variant="on">
+            <label for="username">E-Mail</label>
+            <input
+              [pAutoFocus]="true"
+              pInputText
+              id="username"
+              type="text"
+              fluid
+              autocomplete="email"
+              inputmode="email"
+              formControlName="email"
+            />
+          </p-floatlabel>
+          <p-floatlabel variant="on">
+            <p-password
+              inputId="password"
+              fluid
+              feedback="false"
+              toggleMask="true"
+              autocomplete="new-password"
+              inputmode="text"
+              formControlName="password"
+            />
+            <label for="password">Passwort</label>
+          </p-floatlabel>
+          <p-floatlabel variant="on">
+            <p-password
+              inputId="repeat-password"
+              fluid
+              feedback="false"
+              toggleMask="true"
+              autocomplete="new-password"
+              inputmode="text"
+              formControlName="repeatPassword"
+            />
+            <label for="repeat-password">Passwort wiederholen</label>
+          </p-floatlabel>
+        </div>
+      </ng-template>
+      <ng-template #footer>
+        <div
+          class="w-full flex flex-row align-items-center justify-content-between"
+          fluid
+        >
+          <p-button label="Konto erstellen"></p-button
+          ><a class="primary-link" routerLink="/auth/login">
+            Du hast schon ein Konto?
+          </a>
+        </div>
+      </ng-template>
+    </p-card>
+  </form>
   <div class="flex gap-4 mt-1">
     <a class="secondary-link" routerLink="/imprint">Impressum</a>
     <a class="secondary-link" routerLink="/privacy-policy"> Datenschutz </a>
