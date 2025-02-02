@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { MainComponent } from './main/main.component';
 import { ImprintComponent } from './public/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './public/privacy-policy/privacy-policy.component';
@@ -27,6 +28,10 @@ export const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+      },
+      {
+        path: 'register',
+        component: RegisterComponent,
       },
       {
         path: '**',

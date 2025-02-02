@@ -1,7 +1,7 @@
 <div class="flex flex-column justify-content-center align-items-center">
   <p-card class="w-full md:w-25rem">
     <ng-template #title>ScoutVenture</ng-template>
-    <ng-template #subtitle>Bitte melde dich an</ng-template>
+    <ng-template #subtitle>Neues Konto erstellen</ng-template>
     <ng-template #content>
       <div class="flex flex-column gap-2">
         <p-floatlabel variant="on">
@@ -12,6 +12,10 @@
           <label for="password">Passwort</label>
           <input pInputText id="password" type="text" fluid />
         </p-floatlabel>
+        <p-floatlabel variant="on">
+          <label for="password">Passwort wiederholen</label>
+          <input pInputText id="password" type="text" fluid />
+        </p-floatlabel>
       </div>
     </ng-template>
     <ng-template #footer>
@@ -19,9 +23,9 @@
         class="w-full flex flex-row align-items-center justify-content-between"
         fluid
       >
-        <p-button label="Anmelden"></p-button>
-        <a class="primary-link" routerLink="/auth/register">
-          Jetzt registrieren!
+        <p-button label="Konto erstellen"></p-button
+        ><a class="primary-link" routerLink="/auth/login">
+          Du hast schon ein Konto?
         </a>
       </div>
     </ng-template>
