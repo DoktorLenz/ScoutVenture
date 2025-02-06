@@ -15,7 +15,7 @@ services:
 
   db:
     container_name: database_e2e
-    image: postgres:17.2-alpine@sha256:0bcc5bbbb2aa9c9b4c6505845918c7eb55d783cf5c1f434fac33012579fb149d
+    image: postgres:17.2-alpine@sha256:7e5df973a74872482e320dcbdeb055e178d6f42de0558b083892c50cda833c96
     environment:
       - POSTGRES_USER=scoutventure
       - POSTGRES_PASSWORD=scoutventure
@@ -52,7 +52,7 @@ services:
   zitadel:
     container_name: zitadel_e2e
     restart: "always"
-    image: "ghcr.io/zitadel/zitadel:v2.69.1@sha256:af1d75e6349d507a7bad6fbc717a98c609064e1dc9c18c4d379aba072b129f9c"
+    image: "ghcr.io/zitadel/zitadel:v2.69.2@sha256:2ea35beccdf9d47cbfb9676fbf531145b074cd4aec5b2a1a7c16995593222598"
     command: 'start-from-init --masterkey "MasterkeyNeedsToHave32Characters" --tlsMode disabled'
     environment:
       - ZITADEL_LOG_LEVEL=debug
