@@ -1,13 +1,23 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { DividerModule } from 'primeng/divider';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FluidModule } from 'primeng/fluid';
 import { InputTextModule } from 'primeng/inputtext';
-import { Password, PasswordModule } from 'primeng/password';
+import { MessageModule } from 'primeng/message';
+import { PasswordModule } from 'primeng/password';
+import { PopoverModule } from 'primeng/popover';
+import { TooltipModule } from 'primeng/tooltip';
+import { ErrorWrapperComponent } from '../../shared/form/error-wrapper/error-wrapper.component';
 
 @Component({
   selector: 'sv-register',
@@ -21,27 +31,33 @@ import { Password, PasswordModule } from 'primeng/password';
     PasswordModule,
     AutoFocusModule,
     ReactiveFormsModule,
+    DividerModule,
+    MessageModule,
+    TooltipModule,
+    PopoverModule,
+    ErrorWrapperComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  protected registerForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-    repeatPassword: new FormControl(''),
+  private formBuilder = inject(FormBuilder);
+  protected registerForm = this.formBuilder.group({
+    email: new FormControl<string>('', {
+      validators: [Validators.required, Validators.email],
+      updateOn: 'blur',
+    }),
+    password: new FormControl<string>('', {
+      validators: [Validators.required, Validators.minLength(8)],
+      updateOn: 'blur',
+    }),
+    repeatPassword: new FormControl<string>('', {
+      validators: [Validators.required],
+      updateOn: 'blur',
+    }),
   });
 
-  @ViewChild('passwordInput') protected passwordInput!: Password;
-  @ViewChild('repeatPasswordInput') protected repeatPasswordInput!: Password;
-
-  // protected focusPassword() {
-  //   this.passwordInput.el.nativeElement.querySelector('input').focus();
-  // }
-
-  // protected focusRepeatPassword() {
-  //   this.repeatPasswordInput.el.nativeElement.querySelector('input').focus();
-  // }
-
-  protected onSubmit() {}
+  protected onSubmit() {
+    console.warn(this.registerForm.controls.email.errors);
+  }
 }

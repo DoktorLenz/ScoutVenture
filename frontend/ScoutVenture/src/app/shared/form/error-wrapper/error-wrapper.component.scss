@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.bar {
+  background-color: var(--p-primary-500);
+  width: 4px;
+}
+
+.error {
+  background-color: var(--p-red-500);
+}
