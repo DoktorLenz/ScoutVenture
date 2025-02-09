@@ -8,31 +8,40 @@
       <ng-template #title>ScoutVenture</ng-template>
       <ng-template #subtitle>Bitte melde dich an</ng-template>
       <ng-template #content>
-        <div class="flex flex-column gap-2">
-          <p-floatlabel variant="on">
-            <label for="username">E-Mail</label>
-            <input
-              pInputText
-              id="username"
-              type="text"
-              fluid
-              autocomplete="email"
-              inputmode="email"
-              formControlName="email"
-            />
-          </p-floatlabel>
-          <p-floatlabel variant="on">
-            <p-password
-              inputId="password"
-              fluid
-              feedback="false"
-              toggleMask="true"
-              autocomplete="current-password"
-              inputmode="text"
-              formControlName="password"
-            />
-            <label for="password">Passwort</label>
-          </p-floatlabel>
+        <div class="flex flex-column gap-3">
+          <sv-error-wrapper>
+            <ng-template #title>
+              <label class="font-bold" for="username">E-Mail</label>
+            </ng-template>
+            <ng-template #input>
+              <input
+                pInputText
+                id="username"
+                type="text"
+                fluid
+                autocomplete="email"
+                inputmode="email"
+                formControlName="email"
+              />
+            </ng-template>
+          </sv-error-wrapper>
+
+          <sv-error-wrapper>
+            <ng-template #title>
+              <label class="font-bold" for="password">Passwort</label>
+            </ng-template>
+            <ng-template #input>
+              <p-password
+                inputId="password"
+                fluid
+                feedback="false"
+                toggleMask="true"
+                autocomplete="current-password"
+                inputmode="text"
+                formControlName="password"
+              />
+            </ng-template>
+          </sv-error-wrapper>
         </div>
       </ng-template>
       <ng-template #footer>

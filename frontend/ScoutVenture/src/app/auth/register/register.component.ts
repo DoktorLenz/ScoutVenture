@@ -1,10 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { ButtonModule } from 'primeng/button';
@@ -18,6 +13,7 @@ import { PasswordModule } from 'primeng/password';
 import { PopoverModule } from 'primeng/popover';
 import { TooltipModule } from 'primeng/tooltip';
 import { ErrorWrapperComponent } from '../../shared/form/error-wrapper/error-wrapper.component';
+import { Validators } from '../../shared/form/Validators';
 
 @Component({
   selector: 'sv-register',
@@ -42,22 +38,33 @@ import { ErrorWrapperComponent } from '../../shared/form/error-wrapper/error-wra
 })
 export class RegisterComponent {
   private formBuilder = inject(FormBuilder);
-  protected registerForm = this.formBuilder.group({
-    email: new FormControl<string>('', {
-      validators: [Validators.required, Validators.email],
-      updateOn: 'blur',
-    }),
-    password: new FormControl<string>('', {
-      validators: [Validators.required, Validators.minLength(8)],
-      updateOn: 'blur',
-    }),
-    repeatPassword: new FormControl<string>('', {
-      validators: [Validators.required],
-      updateOn: 'blur',
-    }),
-  });
+  protected registerForm = this.formBuilder.group(
+    {
+      email: new FormControl<string>('', {
+        validators: [Validators.email()],
+        updateOn: 'blur',
+      }),
+      password: new FormControl<string>('', {
+        validators: [Validators.minLength(8)],
+        updateOn: 'change',
+      }),
+      confirmPassword: new FormControl<string>(''),
+    },
+    {
+      validators: [Validators.passwordMatch('password', 'confirmPassword')],
+      updateOn: 'change',
+    }
+  );
 
   protected onSubmit() {
-    console.warn(this.registerForm.controls.email.errors);
+    if (this.registerForm.valid) {
+      // Call the API to register the user
+    } else {
+      this.registerForm.markAsDirty();
+      this.registerForm.controls.email.markAsDirty();
+      this.registerForm.controls.password.markAsDirty();
+      this.registerForm.controls.confirmPassword.markAsDirty();
+      console.log('Form is invalid');
+    }
   }
 }

@@ -35,22 +35,18 @@
               <p-password
                 inputId="password"
                 fluid
-                feedback="true"
+                feedback="false"
                 toggleMask="true"
                 autocomplete="new-password"
                 inputmode="text"
                 formControlName="password"
                 promptLabel="Passwort eingeben"
               >
-                <ng-template #footer>
-                  <p-divider class="my-2" />
-                  <span class="text-xs pl-2 my-0">Mindestens 8 Zeichen</span>
-                </ng-template>
               </p-password>
             </ng-template>
           </sv-error-wrapper>
 
-          <sv-error-wrapper [control]="registerForm.controls.repeatPassword">
+          <sv-error-wrapper [control]="registerForm.controls.confirmPassword">
             <ng-template #title>
               <label class="font-bold" for="repeat-password"
                 >Passwort wiederholen</label
@@ -59,13 +55,13 @@
 
             <ng-template #input>
               <p-password
-                inputId="repeat-password"
+                inputId=""
                 fluid
                 feedback="true"
                 toggleMask="true"
                 autocomplete="new-password"
                 inputmode="text"
-                formControlName="repeatPassword"
+                formControlName="confirmPassword"
                 promptLabel="Passwort wiederholen"
                 feedback="false"
               />

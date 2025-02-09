@@ -9,6 +9,10 @@
   width: 4px;
 }
 
+.valid {
+  background-color: var(--p-lime-500);
+}
+
 .error {
   background-color: var(--p-red-500);
 }
