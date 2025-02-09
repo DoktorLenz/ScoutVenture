@@ -35,7 +35,7 @@ export class Validators {
       const password = formGroup.get(passwordControlName)?.value;
       const confirmPassword = formGroup.get(confirmPasswordControlName)?.value;
 
-      if (password !== confirmPassword) {
+      if (password !== confirmPassword || password === '') {
         formGroup
           .get(confirmPasswordControlName)
           ?.setErrors({ passwordMismatch: true });
