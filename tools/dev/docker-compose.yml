@@ -14,6 +14,21 @@ services:
     ports:
       - "5432:5432"
     command: ["postgres", "-c", "log_statement=all"]
+
+  mailpit:
+    container_name: mailput_dev
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    volumes:
+      - ../../docker/mailpit/data:/data
+    ports:
+      - 8025:8025
+      - 1025:1025
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
   # kc_database:
   #   container_name: kc_database
   #   image: postgres:17.2-alpine@sha256:0bcc5bbbb2aa9c9b4c6505845918c7eb55d783cf5c1f434fac33012579fb149d
