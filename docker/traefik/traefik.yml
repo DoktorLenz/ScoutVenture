@@ -1,0 +1,19 @@
+entryPoints:
+  web:
+    # Listen on port 80 for incoming requests
+    address: :80
+
+api:
+  insecure: true
+  dashboard: true
+
+log:
+  level: DEBUG
+
+accessLog: {}
+
+providers:
+  # Enable the file provider to define routers / middlewares / services in file
+  file:
+    directory: /etc/traefik/conf
+    watch: true

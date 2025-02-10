@@ -1,0 +1,31 @@
+http:
+  routers:
+    mailpit:
+      rule: "Host(`mail.localhost`)"
+      service: mailpit
+      entryPoints:
+        - web
+    frontend:
+      rule: "Host(`localhost`)"
+      service: frontend
+      entryPoints:
+        - web
+    backend:
+      rule: "Host(`api.localhost`)"
+      service: backend
+      entryPoints:
+        - web
+
+  services:
+    mailpit:
+      loadBalancer:
+        servers:
+          - url: "http://mailpit_dev:8025"
+    frontend:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:4200"
+    backend:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:5157"
