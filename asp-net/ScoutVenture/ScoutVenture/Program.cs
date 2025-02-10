@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ScoutVenture.ApiControllers;
 using ScoutVenture.Extensions;
 using ScoutVenture.PostgresAdapter;
+using SmtpAdapter;
 
 namespace ScoutVenture
 {
@@ -12,6 +13,9 @@ namespace ScoutVenture
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Load configurations
+            builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection(SmtpOptions.SmtpOptionsKey));
+            
             // Add services to the container.
             // builder.Services.AddKeycloakAuthentication(builder.Configuration);
             builder.Services.AddIdentity();
@@ -26,6 +30,8 @@ namespace ScoutVenture
                     .UseSeeding(Seeding.Seed).UseAsyncSeeding(SeedingAsync.SeedAsync)
             );
 
+            
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Pr
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmtpAdapter", "SmtpAdapter\SmtpAdapter.csproj", "{B6701464-6385-49DB-A07D-006E54294816}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,8 +46,14 @@ Global
 		{89C2511E-042B-4000-8DE8-DE0A70E91839}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89C2511E-042B-4000-8DE8-DE0A70E91839}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89C2511E-042B-4000-8DE8-DE0A70E91839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6701464-6385-49DB-A07D-006E54294816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6701464-6385-49DB-A07D-006E54294816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6701464-6385-49DB-A07D-006E54294816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6701464-6385-49DB-A07D-006E54294816}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal

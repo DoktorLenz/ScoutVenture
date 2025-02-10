@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ScoutVenture.PostgresAdapter;
+using SmtpAdapter;
 
 namespace ScoutVenture.Extensions
 {
@@ -39,8 +40,22 @@ namespace ScoutVenture.Extensions
         {
             services.AddAuthorization();
             services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
-            services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<PostgresApplicationDbContext>()
+            services.AddIdentityCore<IdentityUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedEmail = true;
+                    options.User.RequireUniqueEmail = true;
+                    options.Password = new PasswordOptions
+                    {
+                        RequireDigit = false,
+                        RequireLowercase = false,
+                        RequireNonAlphanumeric = false,
+                        RequireUppercase = false,
+                        RequiredUniqueChars = 0,
+                        RequiredLength = 8
+                    };
+                }).AddEntityFrameworkStores<PostgresApplicationDbContext>()
                 .AddApiEndpoints();
+            services.AddTransient<IEmailSender<IdentityUser>, IdentityMailSender>();
             return services;
         }
 
