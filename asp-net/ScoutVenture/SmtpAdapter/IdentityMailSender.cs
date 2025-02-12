@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using System.Text.RegularExpressions;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using MimeKit;
@@ -12,6 +13,8 @@ public class IdentityMailSender(IOptions<SmtpOptions> options) : IEmailSender<Id
 
     public async Task SendConfirmationLinkAsync(IdentityUser user, string email, string confirmationLink)
     {
+        confirmationLink = confirmationLink.Replace("/api/", "/auth/");
+        
         MimeMessage message = new();
         message.From.Add(new MailboxAddress("ScoutVenture", _smtpOptions.Email));
         message.To.Add(new MailboxAddress(email, email));

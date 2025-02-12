@@ -51,6 +51,7 @@ namespace ScoutVenture
             app.MapControllers();
             app.MapIdentityApi<IdentityUser>();
 
+            app.UsePathBase("/api");
             app.Run();
         }
     }

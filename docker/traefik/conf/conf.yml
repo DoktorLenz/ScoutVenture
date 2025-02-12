@@ -5,8 +5,13 @@ http:
       service: mailpit
       entryPoints:
         - web
+    api-redirect:
+      rule: "Host(`localhost`) && PathPrefix(`/api`)"
+      service: backend
+      entryPoints:
+        - web
     frontend:
-      rule: "Host(`localhost`)"
+      rule: "Host(`localhost`) && PathPrefix(`/`)"
       service: frontend
       entryPoints:
         - web
