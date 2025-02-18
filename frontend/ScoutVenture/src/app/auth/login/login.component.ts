@@ -10,6 +10,7 @@ import { FluidModule } from 'primeng/fluid';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ErrorWrapperComponent } from '../../shared/form/error-wrapper/error-wrapper.component';
+import { Validators } from '../../shared/form/Validators';
 
 @Component({
   selector: 'sv-login',
@@ -30,8 +31,14 @@ import { ErrorWrapperComponent } from '../../shared/form/error-wrapper/error-wra
 })
 export class LoginComponent {
   protected loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
+    email: new FormControl<string>('', {
+      validators: [Validators.required],
+      updateOn: 'blur',
+    }),
+    password: new FormControl<string>('', {
+      validators: [Validators.required],
+      updateOn: 'blur',
+    }),
   });
 
   constructor(private readonly http: HttpClient) {}
@@ -43,6 +50,10 @@ export class LoginComponent {
         .subscribe((val) => {
           console.log('User is logged in', val);
         });
+    } else {
+      this.loginForm.markAsDirty();
+      this.loginForm.controls.email.markAsDirty();
+      this.loginForm.controls.password.markAsDirty();
     }
   }
 }

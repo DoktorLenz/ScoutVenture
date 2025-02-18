@@ -9,7 +9,7 @@
       <ng-template #subtitle>Bitte melde dich an</ng-template>
       <ng-template #content>
         <div class="flex flex-column gap-3">
-          <sv-error-wrapper>
+          <sv-error-wrapper [control]="loginForm.controls.email">
             <ng-template #title>
               <label class="font-bold" for="username">E-Mail</label>
             </ng-template>
@@ -26,7 +26,7 @@
             </ng-template>
           </sv-error-wrapper>
 
-          <sv-error-wrapper>
+          <sv-error-wrapper [control]="loginForm.controls.password">
             <ng-template #title>
               <label class="font-bold" for="password">Passwort</label>
             </ng-template>
