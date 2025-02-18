@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -33,12 +34,14 @@ import { Validators } from '../../shared/form/Validators';
     TooltipModule,
     PopoverModule,
     ErrorWrapperComponent,
+    CommonModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
   private formBuilder = inject(FormBuilder);
+
   protected registerForm = this.formBuilder.group(
     {
       email: new FormControl<string>('', {
@@ -57,22 +60,26 @@ export class RegisterComponent {
     }
   );
 
+  protected registrationFinished = false;
+
   constructor(private readonly http: HttpClient) {}
 
   protected onSubmit() {
     if (this.registerForm.valid) {
       // Call the API to register the user
-      this.http
-        .post('/api/register', this.registerForm.value)
-        .subscribe((val) => {
-          console.log('User is registered', val);
-        });
+      this.http.post('/api/register', this.registerForm.value).subscribe({
+        next: () => {
+          this.registrationFinished = true;
+        },
+        error: (error) => {
+          this.registerForm.controls.email.setErrors(error.error.errors);
+        },
+      });
     } else {
       this.registerForm.markAsDirty();
       this.registerForm.controls.email.markAsDirty();
       this.registerForm.controls.password.markAsDirty();
       this.registerForm.controls.confirmPassword.markAsDirty();
-      console.log('Form is invalid');
     }
   }
 }

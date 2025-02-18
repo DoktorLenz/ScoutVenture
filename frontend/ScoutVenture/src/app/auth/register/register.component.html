@@ -6,8 +6,18 @@
   >
     <p-card>
       <ng-template #title>ScoutVenture</ng-template>
-      <ng-template #subtitle>Neues Konto erstellen</ng-template>
+      <ng-template #subtitle>
+        @if(registrationFinished){ Neues Konto erstellt } @else { Neues Konto
+        erstellen }
+      </ng-template>
       <ng-template #content>
+        @if(registrationFinished) {
+        <p>
+          Dein neues Konto wurde erfolgreich erstellt. Du hast eine E-Mail
+          bekommen, um deine Konto zu bestätigen. Bitte überprüfe deinen
+          Posteingang.
+        </p>
+        } @else {
         <div class="flex flex-column gap-3">
           <sv-error-wrapper [control]="registerForm.controls.email">
             <ng-template #title>
@@ -68,16 +78,24 @@
             </ng-template>
           </sv-error-wrapper>
         </div>
+        }
       </ng-template>
       <ng-template #footer>
         <div
           class="w-full flex flex-row align-items-center justify-content-between"
           fluid
         >
+          @if(registrationFinished){
+          <p-button
+            label="Zurück zum Login"
+            routerLink="/auth/login"
+          ></p-button>
+          } @else {
           <p-button label="Konto erstellen" type="submit"></p-button
           ><a class="primary-link" routerLink="/auth/login">
             Du hast schon ein Konto?
           </a>
+          }
         </div>
       </ng-template>
     </p-card>

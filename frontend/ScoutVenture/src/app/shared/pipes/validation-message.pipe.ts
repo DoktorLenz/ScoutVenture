@@ -24,6 +24,9 @@ export class ValidationMessagePipe implements PipeTransform {
     if (errors['passwordMismatch']) {
       errorMessages.push('Passwörter stimmen nicht überein');
     }
+    if (errors['DuplicateEmail']) {
+      errorMessages.push('E-Mail-Adresse bereits vergeben');
+    }
 
     return errorMessages[0];
   }
