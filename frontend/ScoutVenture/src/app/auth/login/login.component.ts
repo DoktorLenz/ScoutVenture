@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -33,7 +34,15 @@ export class LoginComponent {
     password: new FormControl(''),
   });
 
-  onSubmit() {
-    console.warn(this.loginForm.value);
+  constructor(private readonly http: HttpClient) {}
+
+  protected onSubmit() {
+    if (this.loginForm.valid) {
+      this.http
+        .post('/api/login?useCookies=true', this.loginForm.value)
+        .subscribe((val) => {
+          console.log('User is logged in', val);
+        });
+    }
   }
 }

@@ -1,8 +1,10 @@
 ﻿using System.Text.RegularExpressions;
+using Fluid;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using SmtpAdapter.Templates;
 
 namespace SmtpAdapter;
 
@@ -14,20 +16,32 @@ public class IdentityMailSender(IOptions<SmtpOptions> options) : IEmailSender<Id
     public async Task SendConfirmationLinkAsync(IdentityUser user, string email, string confirmationLink)
     {
         confirmationLink = confirmationLink.Replace("/api/", "/auth/");
-        
-        MimeMessage message = new();
-        message.From.Add(new MailboxAddress("ScoutVenture", _smtpOptions.Email));
-        message.To.Add(new MailboxAddress(email, email));
-        message.Subject = "Willkommen in ScoutVenture - E-Mail Adresse bestätigen";
-        message.Body = new TextPart("html")
-        {
-            Text = $"""
-                    Klicken Sie auf den Link um ihre Anmeldung bei ScoutVenture zu bestätigen.
-                    <a href="{confirmationLink}">Link</a>
-                    """
-        };
 
-        await SendMessageAsync(message);
+
+        var parser = new FluidParser();
+        var model = new ConfirmationMailModel(confirmationLink);
+        var source = IdentityMailTemplates.ConfirmationLinkTemplate;
+
+        if (parser.TryParse(source, out var template, out var error))
+        {
+            var context = new TemplateContext(model);
+            
+            
+            MimeMessage message = new();
+            message.From.Add(new MailboxAddress("ScoutVenture", _smtpOptions.Email));
+            message.To.Add(new MailboxAddress(email, email));
+            message.Subject = "Willkommen in ScoutVenture - E-Mail Adresse bestätigen";
+            var text = await  template.RenderAsync(context);
+            message.Body = new TextPart("html")
+            {
+                Text = text
+            };
+
+            await SendMessageAsync(message);
+        }
+        
+        
+        
     }
 
     public Task SendPasswordResetLinkAsync(IdentityUser user, string email, string resetLink)

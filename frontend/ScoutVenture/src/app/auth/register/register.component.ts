@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -56,9 +57,16 @@ export class RegisterComponent {
     }
   );
 
+  constructor(private readonly http: HttpClient) {}
+
   protected onSubmit() {
     if (this.registerForm.valid) {
       // Call the API to register the user
+      this.http
+        .post('/api/register', this.registerForm.value)
+        .subscribe((val) => {
+          console.log('User is registered', val);
+        });
     } else {
       this.registerForm.markAsDirty();
       this.registerForm.controls.email.markAsDirty();

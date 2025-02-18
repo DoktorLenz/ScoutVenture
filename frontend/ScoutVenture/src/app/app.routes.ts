@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
+import { ConfirmEmailComponent } from './auth/confirm-email/confirm-email.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { MainComponent } from './main/main.component';
@@ -32,6 +33,10 @@ export const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent,
+      },
+      {
+        path: 'confirmEmail',
+        component: ConfirmEmailComponent,
       },
       {
         path: '**',
