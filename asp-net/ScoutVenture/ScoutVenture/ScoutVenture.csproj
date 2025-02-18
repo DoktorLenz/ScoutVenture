@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ApiControllers\ApiControllers.csproj" />
     <ProjectReference Include="..\PostgresAdapter\PostgresAdapter.csproj" />
     <ProjectReference Include="..\SmtpAdapter\SmtpAdapter.csproj" />
   </ItemGroup>

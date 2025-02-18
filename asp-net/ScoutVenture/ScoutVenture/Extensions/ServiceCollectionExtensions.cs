@@ -38,7 +38,7 @@ namespace ScoutVenture.Extensions
 
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
-            services.AddAuthorization();
+            
             services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
             services.AddIdentityCore<IdentityUser>(options =>
                 {
@@ -56,6 +56,7 @@ namespace ScoutVenture.Extensions
                 }).AddEntityFrameworkStores<PostgresApplicationDbContext>()
                 .AddApiEndpoints();
             services.AddTransient<IEmailSender<IdentityUser>, IdentityMailSender>();
+            services.AddAuthorization();
             return services;
         }
 

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ScoutVenture.ApiControllers;
 using ScoutVenture.Extensions;
 using ScoutVenture.PostgresAdapter;
 using SmtpAdapter;
@@ -20,7 +19,7 @@ namespace ScoutVenture
             // builder.Services.AddKeycloakAuthentication(builder.Configuration);
             builder.Services.AddIdentity();
 
-            builder.Services.AddControllers().AddApplicationPart(typeof(WeatherForecastController).Assembly);
+            builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -44,14 +43,19 @@ namespace ScoutVenture
             }
 
             app.UseHttpsRedirection();
-
+            
+            
+            
+            app.UseRouting();
+            app.UsePathBase("/api");
+            
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.MapControllers();
             app.MapIdentityApi<IdentityUser>();
 
-            app.UsePathBase("/api");
+            
             app.Run();
         }
     }
