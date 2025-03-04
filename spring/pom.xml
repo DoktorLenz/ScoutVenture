@@ -32,7 +32,7 @@
         <org.springdoc-openapi-starter-webmvc-ui.version>2.8.5</org.springdoc-openapi-starter-webmvc-ui.version>
 
         <org.jboss.resteasy.version>4.7.4.Final</org.jboss.resteasy.version>
-        <org.jsoup.version>1.18.3</org.jsoup.version>
+        <org.jsoup.version>1.19.1</org.jsoup.version>
         <org.hamcrest.version>3.0</org.hamcrest.version>
         <io.rest-assured.version>5.5.1</io.rest-assured.version>
         <org.surefire.plugin.version>3.5.2</org.surefire.plugin.version>
