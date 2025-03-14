@@ -21,7 +21,7 @@
         <org.lombok.version>1.18.36</org.lombok.version>
         <hibernate.jpamodelgen.version>6.2.0.Final</hibernate.jpamodelgen.version>
         <org.liquibase.version>4.31.1</org.liquibase.version>
-        <io.hypersistence.version>3.9.4</io.hypersistence.version>
+        <io.hypersistence.version>3.9.5</io.hypersistence.version>
         <org.springframework.security.test.version>6.4.3</org.springframework.security.test.version>
         <org.mockito.version>5.2.0</org.mockito.version>
         <org.testcontainers.version>1.20.6</org.testcontainers.version>
