@@ -66,7 +66,6 @@ export class RegisterComponent {
 
   protected onSubmit() {
     if (this.registerForm.valid) {
-      // Call the API to register the user
       this.http.post('/api/register', this.registerForm.value).subscribe({
         next: () => {
           this.registrationFinished = true;
