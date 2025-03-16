@@ -27,6 +27,9 @@ export class ValidationMessagePipe implements PipeTransform {
     if (errors['DuplicateEmail']) {
       errorMessages.push('E-Mail-Adresse bereits vergeben');
     }
+    if (errors['invalidCredentials']) {
+      errorMessages.push('E-Mail-Adresse oder Passwort falsch');
+    }
 
     return errorMessages[0];
   }

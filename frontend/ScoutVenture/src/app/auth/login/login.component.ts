@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -25,6 +26,7 @@ import { Validators } from '../../shared/form/Validators';
     AutoFocusModule,
     ReactiveFormsModule,
     ErrorWrapperComponent,
+    CommonModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -47,8 +49,19 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.http
         .post('/api/login?useCookies=true', this.loginForm.value)
-        .subscribe((val) => {
-          console.log('User is logged in', val);
+        .subscribe({
+          next: (val) => {
+            console.log('User is logged in', val);
+          },
+          error: (err) => {
+            this.loginForm.setErrors({ invalidCredentials: true });
+            this.loginForm.controls.password.setErrors({
+              invalidCredentials: true,
+            });
+            this.loginForm.controls.email.setErrors({
+              invalidCredentials: true,
+            });
+          },
         });
     } else {
       this.loginForm.markAsDirty();
