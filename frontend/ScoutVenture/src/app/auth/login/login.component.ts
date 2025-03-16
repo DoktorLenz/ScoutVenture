@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -43,17 +43,20 @@ export class LoginComponent {
     }),
   });
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly router: Router
+  ) {}
 
   protected onSubmit() {
     if (this.loginForm.valid) {
       this.http
         .post('/api/login?useCookies=true', this.loginForm.value)
         .subscribe({
-          next: (val) => {
-            console.log('User is logged in', val);
+          next: () => {
+            this.router.navigate(['/']);
           },
-          error: (err) => {
+          error: () => {
             this.loginForm.setErrors({ invalidCredentials: true });
             this.loginForm.controls.password.setErrors({
               invalidCredentials: true,
