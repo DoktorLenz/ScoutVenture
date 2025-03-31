@@ -18,7 +18,7 @@
         <java.version>21</java.version>
 
         <org.postgres.jdbc-driver.version>42.7.5</org.postgres.jdbc-driver.version>
-        <org.lombok.version>1.18.36</org.lombok.version>
+        <org.lombok.version>1.18.38</org.lombok.version>
         <hibernate.jpamodelgen.version>6.2.0.Final</hibernate.jpamodelgen.version>
         <org.liquibase.version>4.31.1</org.liquibase.version>
         <io.hypersistence.version>3.9.9</io.hypersistence.version>
