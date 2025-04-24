@@ -24,7 +24,7 @@
         <io.hypersistence.version>3.9.9</io.hypersistence.version>
         <org.springframework.security.test.version>6.4.5</org.springframework.security.test.version>
         <org.mockito.version>5.2.0</org.mockito.version>
-        <org.testcontainers.version>1.20.6</org.testcontainers.version>
+        <org.testcontainers.version>1.21.0</org.testcontainers.version>
         <org.jacoco.version>0.8.13</org.jacoco.version>
         <org.apache.httpcomponents.client5.version>5.4.3</org.apache.httpcomponents.client5.version>
         <org.keycloak.keycloak-admin-client.version>26.0.5</org.keycloak.keycloak-admin-client.version>
