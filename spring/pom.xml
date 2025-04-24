@@ -26,7 +26,7 @@
         <org.mockito.version>5.2.0</org.mockito.version>
         <org.testcontainers.version>1.21.0</org.testcontainers.version>
         <org.jacoco.version>0.8.13</org.jacoco.version>
-        <org.apache.httpcomponents.client5.version>5.4.3</org.apache.httpcomponents.client5.version>
+        <org.apache.httpcomponents.client5.version>5.4.4</org.apache.httpcomponents.client5.version>
         <org.keycloak.keycloak-admin-client.version>26.0.5</org.keycloak.keycloak-admin-client.version>
 
         <org.springdoc-openapi-starter-webmvc-ui.version>2.8.6</org.springdoc-openapi-starter-webmvc-ui.version>
