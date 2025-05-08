@@ -39,7 +39,7 @@
         <org.failsafe.plugin.version>3.5.3</org.failsafe.plugin.version>
         <org.springframework.cloud.wiremock.version>4.2.1</org.springframework.cloud.wiremock.version>
 
-        <archunit.version>1.4.0</archunit.version>
+        <archunit.version>1.4.1</archunit.version>
         <arch-unit-maven-plugin.version>4.0.2</arch-unit-maven-plugin.version>
 
         <!-- non-dependencies -->
