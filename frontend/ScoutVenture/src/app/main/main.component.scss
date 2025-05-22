@@ -14,15 +14,13 @@
   overflow: hidden;
 }
 
+.content-header {
+  border-bottom: 1px solid var(--p-menu-separator-border-color);
+}
+
 .content-body {
   margin: var(--p-menu-list-padding);
   padding: var(--p-menu-item-padding);
-  outline: 0 none;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--p-menu-list-gap);
-  border-top: 1px solid var(--p-menu-separator-border-color);
   overflow: auto;
 }
 

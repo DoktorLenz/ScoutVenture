@@ -19,6 +19,127 @@ export class MainMenuComponent implements OnInit {
 
   public ngOnInit() {
     this.items = [
+      {
+        label: 'Documents',
+        items: [
+          {
+            label: 'New',
+            icon: 'pi pi-plus',
+            shortcut: '⌘+N',
+          },
+          {
+            label: 'Search',
+            icon: 'pi pi-search',
+            shortcut: '⌘+S',
+          },
+        ],
+      },
+      { separator: true },
+      {
+        label: 'Documents',
+        items: [
+          {
+            label: 'New',
+            icon: 'pi pi-plus',
+            shortcut: '⌘+N',
+          },
+          {
+            label: 'Search',
+            icon: 'pi pi-search',
+            shortcut: '⌘+S',
+          },
+        ],
+      },
+      {
+        label: 'Documents',
+        items: [
+          {
+            label: 'New',
+            icon: 'pi pi-plus',
+            shortcut: '⌘+N',
+          },
+          {
+            label: 'Search',
+            icon: 'pi pi-search',
+            shortcut: '⌘+S',
+          },
+        ],
+      },
+      {
+        label: 'Documents',
+        items: [
+          {
+            label: 'New',
+            icon: 'pi pi-plus',
+            shortcut: '⌘+N',
+          },
+          {
+            label: 'Search',
+            icon: 'pi pi-search',
+            shortcut: '⌘+S',
+          },
+        ],
+      },
+      {
+        label: 'Documents',
+        items: [
+          {
+            label: 'New',
+            icon: 'pi pi-plus',
+            shortcut: '⌘+N',
+          },
+          {
+            label: 'Search',
+            icon: 'pi pi-search',
+            shortcut: '⌘+S',
+          },
+        ],
+      },
+      {
+        label: 'Documents',
+        items: [
+          {
+            label: 'New',
+            icon: 'pi pi-plus',
+            shortcut: '⌘+N',
+          },
+          {
+            label: 'Search',
+            icon: 'pi pi-search',
+            shortcut: '⌘+S',
+          },
+        ],
+      },
+      {
+        label: 'Documents',
+        items: [
+          {
+            label: 'New',
+            icon: 'pi pi-plus',
+            shortcut: '⌘+N',
+          },
+          {
+            label: 'Search',
+            icon: 'pi pi-search',
+            shortcut: '⌘+S',
+          },
+        ],
+      },
+      {
+        label: 'Documents',
+        items: [
+          {
+            label: 'New',
+            icon: 'pi pi-plus',
+            shortcut: '⌘+N',
+          },
+          {
+            label: 'Search',
+            icon: 'pi pi-search',
+            shortcut: '⌘+S',
+          },
+        ],
+      },
       { separator: true },
       {
         label: 'Documents',

@@ -29,6 +29,7 @@ sv-main-menu {
 
     .p-menu-list {
       flex-grow: 1;
+      overflow: auto;
     }
   }
 }
@@ -48,4 +49,8 @@ sv-main {
   padding: 8px;
   outline: none;
   border: none;
+}
+
+.p-overlay-mask.p-drawer-mask {
+  display: none;
 }
