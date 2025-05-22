@@ -45,11 +45,11 @@ export class RegisterComponent {
   protected registerForm = this.formBuilder.group(
     {
       email: new FormControl<string>('', {
-        validators: [Validators.email()],
+        // validators: [Validators.email()],
         updateOn: 'blur',
       }),
       password: new FormControl<string>('', {
-        validators: [Validators.minLength(8)],
+        // validators: [Validators.minLength(8)],
         updateOn: 'change',
       }),
       confirmPassword: new FormControl<string>(''),
