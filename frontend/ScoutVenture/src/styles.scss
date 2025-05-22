@@ -16,3 +16,36 @@
 .secondary-link {
   color: white;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+sv-main-menu {
+  .p-menu.p-component {
+    display: flex;
+    flex-flow: column;
+
+    .p-menu-list {
+      flex-grow: 1;
+    }
+  }
+}
+
+sv-main {
+  #menuDialog > .p-dialog-mask > .p-dialog.p-component {
+    border: none;
+    width: 100%;
+    height: 100%;
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+}
+
+.p-drawer.p-drawer-active.p-drawer-full {
+  background-color: transparent;
+  padding: 8px;
+  outline: none;
+  border: none;
+}

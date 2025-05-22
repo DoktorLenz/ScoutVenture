@@ -1,0 +1,47 @@
+<p-menu
+  [model]="items"
+  class="flex justify-center h-full"
+  styleClass="w-full h-full"
+>
+  <ng-template #start>
+    <div class="content-header flex px-2 py-2 align-items-center">
+      <span class="text-xl font-semibold flex-grow-1">ScoutVenture</span>
+      <i
+        class="pi pi-times flex-none text-2xl px-1 xl:hidden"
+        (click)="close.emit($event)"
+      ></i>
+    </div>
+  </ng-template>
+  <ng-template #submenuheader let-item>
+    <span class="text-primary font-bold">{{ item.label }}</span>
+  </ng-template>
+  <ng-template #item let-item>
+    <a pRipple class="flex items-center p-menu-item-link">
+      <span [class]="item.icon"></span>
+      <span class="ml-2">{{ item.label }}</span>
+      @if(item.badge) {
+      <p-badge *ngIf="item.badge" class="ml-auto" [value]="item.badge" />
+      } @if(item.shortcut){
+      <span
+        class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1"
+      >
+        {{ item.shortcut }}
+      </span>
+      }
+    </a>
+  </ng-template>
+  <ng-template #end>
+    <div class="flex flex-row align-items-center px-2">
+      <p-avatar
+        class="flex-none"
+        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+        class="mr-2"
+        shape="circle"
+      />
+      <span class="inline-flex flex-column flex-grow-1">
+        <span class="font-bold">Amy Elsner</span>
+        <span class="text-sm">Admin</span>
+      </span>
+    </div>
+  </ng-template>
+</p-menu>
