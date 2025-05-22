@@ -4,6 +4,7 @@ import { ConfirmEmailComponent } from './auth/confirm-email/confirm-email.compon
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { MainComponent } from './main/main.component';
 import { ImprintComponent } from './public/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './public/privacy-policy/privacy-policy.component';
@@ -42,6 +43,10 @@ export const routes: Routes = [
       {
         path: 'forgotPassword',
         component: ForgotPasswordComponent,
+      },
+      {
+        path: 'resetPassword',
+        component: ResetPasswordComponent,
       },
       {
         path: '**',
