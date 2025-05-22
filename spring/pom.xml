@@ -34,7 +34,7 @@
         <org.jboss.resteasy.version>4.7.4.Final</org.jboss.resteasy.version>
         <org.jsoup.version>1.20.1</org.jsoup.version>
         <org.hamcrest.version>3.0</org.hamcrest.version>
-        <io.rest-assured.version>5.5.2</io.rest-assured.version>
+        <io.rest-assured.version>5.5.5</io.rest-assured.version>
         <org.surefire.plugin.version>3.5.3</org.surefire.plugin.version>
         <org.failsafe.plugin.version>3.5.3</org.failsafe.plugin.version>
         <org.springframework.cloud.wiremock.version>4.2.1</org.springframework.cloud.wiremock.version>
