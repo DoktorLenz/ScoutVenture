@@ -48,5 +48,52 @@
                                                          </body>
                                                        </html>
                                                        """;
+
+        public const string ResetLinkTemplate = """
+                                                <!DOCTYPE html>
+                                                <html>
+                                                  <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; color: white;">
+                                                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f4f4f4;">
+                                                      <tr>
+                                                        <td align="center">
+                                                          <table role="presentation" width="600" cellspacing="0" cellpadding="20" border="0" style="background-color: #003056; border-radius: 10px; text-align: center;">
+                                                            <tr>
+                                                              <td>
+                                                                <h1 style="margin: 0; font-size: 24px;">ScoutVenture</h1>
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>
+                                                                <h3 style="margin: 0;">Passwort zurücksetzen</h3>
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>
+                                                                <p style="margin: 0; font-size: 16px; line-height: 1.5;">
+                                                                  Du möchtest dein Passwort zurücksetzen? Dann klicke auf "Passwort zurücksetzen".
+                                                                </p>
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>
+                                                                <a href="{{ ResetLink }}" style="display: inline-block; text-decoration: none; background-color: #003056; color: white; font-weight: bold; border: 1px solid white; padding: 10px 20px; border-radius: 4px; font-size: 16px;">
+                                                                  Passwort zurücksetzen
+                                                                </a>
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>
+                                                                <p style="margin: 0; font-size: 12px; color: #ccc;">
+                                                                  Du warst das nicht? Dann brauchst du nichts tun.
+                                                                </p>
+                                                              </td>
+                                                            </tr>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                  </body>
+                                                </html>
+                                                """;
     }
 }

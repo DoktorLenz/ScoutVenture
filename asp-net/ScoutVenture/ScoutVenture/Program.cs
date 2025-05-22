@@ -1,3 +1,4 @@
+using AppSettings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ScoutVenture.Extensions;
@@ -14,9 +15,9 @@ namespace ScoutVenture
 
             // Load configurations
             builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection(SmtpOptions.SmtpOptionsKey));
+            builder.Services.Configure<HostInformation>(builder.Configuration.GetSection(HostInformation.HostInformationKey));
             
             // Add services to the container.
-            // builder.Services.AddKeycloakAuthentication(builder.Configuration);
             builder.Services.AddIdentity();
 
             builder.Services.AddControllers();

@@ -1,4 +1,4 @@
-﻿namespace SmtpAdapter
+﻿namespace AppSettings
 {
     public class SmtpOptions
     {
