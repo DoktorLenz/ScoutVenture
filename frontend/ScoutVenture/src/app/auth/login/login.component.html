@@ -42,6 +42,12 @@
               />
             </ng-template>
           </sv-error-wrapper>
+
+          @if(loginForm.errors?.['invalidCredentials']){
+          <a class="primary-link" routerLink="/auth/forgotPassword">
+            Passwort zurücksetzen?
+          </a>
+          }
         </div>
       </ng-template>
       <ng-template #footer>
