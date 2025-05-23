@@ -52,7 +52,7 @@ services:
   zitadel:
     container_name: zitadel_e2e
     restart: "always"
-    image: "ghcr.io/zitadel/zitadel:v2.71.10@sha256:b3b4f3b9050464487c7d25f7940b55f10225aea0cd5285207956b9cc2f6bd03c"
+    image: "ghcr.io/zitadel/zitadel:v3.2.0@sha256:6b1bd27a2374cb797c0d47cadbffb2037d70b375fc4b3ce368194ce1ba95c966"
     command: 'start-from-init --masterkey "MasterkeyNeedsToHave32Characters" --tlsMode disabled'
     environment:
       - ZITADEL_LOG_LEVEL=debug
