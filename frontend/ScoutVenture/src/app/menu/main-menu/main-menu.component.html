@@ -48,5 +48,20 @@
         <span class="text-sm">Admin</span>
       </span>
     </div>
+    <div class="flex justify-content-around">
+      <a
+        class="primary-link text-xs"
+        routerLink="/imprint"
+        (click)="close.emit($event)"
+        >Impressum</a
+      >
+      <a
+        class="primary-link text-xs"
+        routerLink="/privacy-policy"
+        (click)="close.emit($event)"
+      >
+        Datenschutz
+      </a>
+    </div>
   </ng-template>
 </p-menu>

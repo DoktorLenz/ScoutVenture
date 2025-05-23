@@ -114,14 +114,26 @@ export const routes: Routes = [
         data: { title: 'Meine Personen' },
       },
       administrationRoutes,
+      {
+        path: 'imprint',
+        component: ImprintComponent,
+        title: 'Impressum',
+        data: { title: 'Impressum' },
+      },
+      {
+        path: 'privacy-policy',
+        component: PrivacyPolicyComponent,
+        title: 'Datenschutz',
+        data: { title: 'Datenschutz' },
+      },
     ],
   },
   {
-    path: 'privacy-policy',
+    path: 'public/privacy-policy',
     component: PrivacyPolicyComponent,
   },
   {
-    path: 'imprint',
+    path: 'public/imprint',
     component: ImprintComponent,
   },
   authRoute,
