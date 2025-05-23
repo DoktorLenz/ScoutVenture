@@ -27,7 +27,6 @@ namespace ScoutVenture
             builder.Services.AddDbContext<PostgresApplicationDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"),
                     o => o.SetPostgresVersion(17, 2))
-                    .UseSeeding(Seeding.Seed).UseAsyncSeeding(SeedingAsync.SeedAsync)
             );
 
             

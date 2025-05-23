@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -193,6 +194,48 @@ namespace ScoutVenture.PostgresAdapter.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            // Add roles
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: ["Id", "Name", "NormalizedName"],
+                values: new object[,]
+                {
+                    {"9fe88cee-9635-41be-988f-1cb08cd30a1d", "Admin", "ADMIN"},
+                    {"ee360240-3f6c-4342-a627-cbe0b514d7b6","User", "USER"}
+                });
+            
+            // Add first user
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: ["Id", 
+                    "UserName", "NormalizedUserName", 
+                    "Email", "NormalizedEmail", 
+                    "EmailConfirmed", 
+                    "PasswordHash", 
+                    "SecurityStamp", 
+                    "ConcurrencyStamp", 
+                    "PhoneNumberConfirmed", "TwoFactorEnabled",
+                    "LockoutEnabled", "AccessFailedCount"],
+                values: ["4040b3b8-3a81-40b3-9f8f-868355ef829e",
+                    "Administrator", "ADMINISTRATOR", 
+                    "admin@scoutventure", "ADMIN@SCOUTVENTURE",
+                    true, 
+                    "AQAAAAIAAYagAAAAEMkTc3RxxC5AN4h2RWXMybdMzszzhe3E7t9y+LwxgZkak/64681vS96tG1eadERFOw==",
+                    "V5MWSFUZXYN6HCSTUBJ77BRPHY6POKS5",
+                    "947a6e8b-dfc0-4e20-bfeb-db89973d36aa", 
+                    false, false,
+                    true, 0 ]);
+            
+            // Make first user admin
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: ["UserId", "RoleId" ],
+                values: new object[,]
+                {
+                    {"4040b3b8-3a81-40b3-9f8f-868355ef829e", "9fe88cee-9635-41be-988f-1cb08cd30a1d"},
+                    {"4040b3b8-3a81-40b3-9f8f-868355ef829e", "ee360240-3f6c-4342-a627-cbe0b514d7b6"}
+                });
         }
 
         /// <inheritdoc />
