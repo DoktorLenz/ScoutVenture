@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MobileMenuComponent } from './mobile-menu.component';
+import { EventsOverviewComponent } from './events-overview.component';
 
-describe('MobileMenuComponent', () => {
-  let component: MobileMenuComponent;
-  let fixture: ComponentFixture<MobileMenuComponent>;
+describe('EventsOverviewComponent', () => {
+  let component: EventsOverviewComponent;
+  let fixture: ComponentFixture<EventsOverviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MobileMenuComponent]
+      imports: [EventsOverviewComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MobileMenuComponent);
+    fixture = TestBed.createComponent(EventsOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

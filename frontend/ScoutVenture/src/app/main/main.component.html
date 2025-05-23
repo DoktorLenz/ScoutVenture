@@ -1,7 +1,9 @@
 <sv-main-menu class="hidden xl:block desktop-menu"></sv-main-menu>
 <div class="content">
   <div class="content-header flex mx-1 px-1 align-items-center">
-    <span class="text-xl font-semibold flex-grow-1 py-2">Documents</span>
+    <span class="text-xl font-semibold flex-grow-1 py-2">{{
+      currentTitle
+    }}</span>
     <i
       class="pi pi-bars flex-none text-2xl px-1 xl:hidden"
       (click)="drawerMenuOpen = true"
