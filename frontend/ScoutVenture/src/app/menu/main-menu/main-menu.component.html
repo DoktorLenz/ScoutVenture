@@ -47,6 +47,12 @@
         <span class="font-bold">Amy Elsner</span>
         <span class="text-sm">Admin</span>
       </span>
+      <!-- <i class="pi pi-sign-out flex-none mr-2" (click)="close.emit($event)"></i> -->
+      <p-button
+        icon="pi pi-sign-out"
+        [text]="true"
+        (onClick)="logout()"
+      ></p-button>
     </div>
     <div class="flex justify-content-around">
       <a

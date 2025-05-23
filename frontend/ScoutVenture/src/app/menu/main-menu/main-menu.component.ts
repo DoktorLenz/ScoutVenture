@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MenuItem } from 'primeng/api';
@@ -73,5 +74,18 @@ export class MainMenuComponent implements OnInit {
         ],
       },
     ];
+  }
+
+  constructor(private readonly http: HttpClient) {}
+
+  protected logout(): void {
+    this.http.post('/api/logout', {}).subscribe({
+      next: () => {
+        window.location.href = '/';
+      },
+      error: (err) => {
+        console.error('Logout failed', err);
+      },
+    });
   }
 }
