@@ -33,7 +33,7 @@
     "@primeng/themes": "^19.0.5",
     "angular-auth-oidc-client": "19.0.1",
     "jwt-decode": "^4.0.0",
-    "ng-mocks": "14.13.4",
+    "ng-mocks": "14.13.5",
     "primeicons": "7.0.0",
     "primeng": "^19.0.5",
     "rxjs": "7.8.2",
