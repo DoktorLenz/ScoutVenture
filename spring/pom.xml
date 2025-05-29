@@ -24,7 +24,7 @@
         <io.hypersistence.version>3.9.10</io.hypersistence.version>
         <org.springframework.security.test.version>6.5.0</org.springframework.security.test.version>
         <org.mockito.version>5.2.0</org.mockito.version>
-        <org.testcontainers.version>1.21.0</org.testcontainers.version>
+        <org.testcontainers.version>1.21.1</org.testcontainers.version>
         <org.jacoco.version>0.8.13</org.jacoco.version>
         <org.apache.httpcomponents.client5.version>5.5</org.apache.httpcomponents.client5.version>
         <org.keycloak.keycloak-admin-client.version>26.0.5</org.keycloak.keycloak-admin-client.version>
@@ -37,7 +37,7 @@
         <io.rest-assured.version>5.5.5</io.rest-assured.version>
         <org.surefire.plugin.version>3.5.3</org.surefire.plugin.version>
         <org.failsafe.plugin.version>3.5.3</org.failsafe.plugin.version>
-        <org.springframework.cloud.wiremock.version>4.2.1</org.springframework.cloud.wiremock.version>
+        <org.springframework.cloud.wiremock.version>4.3.0</org.springframework.cloud.wiremock.version>
 
         <archunit.version>1.4.1</archunit.version>
         <arch-unit-maven-plugin.version>4.0.2</arch-unit-maven-plugin.version>
