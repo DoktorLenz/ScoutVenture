@@ -1,0 +1,54 @@
+<div class="flex-1 flex gap-3">
+  <div class="rank-card">
+    <img class="rank-icon bg-woelfling" src="/dpsg-lilie_weiß.png" />
+
+    <div class="rank-details">
+      <span class="text-lg" style="color: var(--color-woelfling)"
+        >Wölflinge</span
+      >
+      @if(woelfingeCount) {
+      <span class="text-sm w-max">{{ woelfingeCount }} Mitglieder</span>
+      } @else {
+      <p-skeleton class="text-sm" width="85px"></p-skeleton>}
+    </div>
+  </div>
+  <div class="rank-card">
+    <img class="rank-icon bg-jungpfadfinder" src="/dpsg-lilie_weiß.png" />
+
+    <div class="rank-details">
+      <span class="text-lg" style="color: var(--color-jungpfadfinder)"
+        >Jungpfadfinder</span
+      >
+      @if(jungpfadfinderCount) {
+      <span class="text-sm w-max">{{ jungpfadfinderCount }} Mitglieder</span>
+      } @else {
+      <p-skeleton class="text-sm" width="85px"></p-skeleton>}
+    </div>
+  </div>
+</div>
+<div class="flex-1 flex gap-3">
+  <div class="rank-card">
+    <img class="rank-icon bg-pfadfinder" src="/dpsg-lilie_weiß.png" />
+
+    <div class="rank-details">
+      <span class="text-lg" style="color: var(--color-pfadfinder)"
+        >Pfadfinder</span
+      >
+      @if(pfadfinderCount) {
+      <span class="text-sm w-max">{{ pfadfinderCount }} Mitglieder</span>
+      } @else {
+      <p-skeleton class="text-sm" width="85px"></p-skeleton>}
+    </div>
+  </div>
+  <div class="rank-card">
+    <img class="rank-icon bg-rover" src="/dpsg-lilie_weiß.png" />
+
+    <div class="rank-details">
+      <span class="text-lg" style="color: var(--color-rover)">Rover</span>
+      @if(roverCount) {
+      <span class="text-sm w-max">{{ roverCount }} Mitglieder</span>
+      } @else {
+      <p-skeleton class="text-sm" width="85px"></p-skeleton>}
+    </div>
+  </div>
+</div>

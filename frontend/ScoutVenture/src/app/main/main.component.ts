@@ -1,5 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterOutlet,
+} from '@angular/router';
 import { DialogModule } from 'primeng/dialog';
 import { Drawer, DrawerModule } from 'primeng/drawer';
 import { filter, map, mergeMap } from 'rxjs';
@@ -7,7 +12,7 @@ import { MainMenuComponent } from '../menu/main-menu/main-menu.component';
 
 @Component({
   selector: 'sv-main',
-  imports: [MainMenuComponent, DrawerModule, DialogModule],
+  imports: [MainMenuComponent, DrawerModule, DialogModule, RouterOutlet],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })

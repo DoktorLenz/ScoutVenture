@@ -5,6 +5,7 @@
 
 .content {
   background: var(--p-menu-background);
+  background: var(--p-neutral-100);
   color: var(--p-menu-color);
   border: 1px solid var(--p-menu-border-color);
   border-radius: var(--p-menu-border-radius);
@@ -20,7 +21,6 @@
 
 .content-body {
   margin: var(--p-menu-list-padding);
-  padding: var(--p-menu-item-padding);
   overflow: auto;
 }
 

@@ -7,6 +7,27 @@
     "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   background-color: var(--p-surface-700);
+
+  --color-woelfling: #ff6400;
+  --color-jungpfadfinder: #2f53a7;
+  --color-pfadfinder: #00823c;
+  --color-rover: #cc1f2f;
+}
+
+.bg-woelfling {
+  background-color: var(--color-woelfling) !important;
+}
+
+.bg-jungpfadfinder {
+  background-color: var(--color-jungpfadfinder) !important;
+}
+
+.bg-pfadfinder {
+  background-color: var(--color-pfadfinder) !important;
+}
+
+.bg-rover {
+  background-color: var(--color-rover) !important;
 }
 
 .primary-link {
