@@ -14,11 +14,13 @@ import { MainComponent } from './main/main.component';
 import { PersonComponent } from './main/person/person.component';
 import { ImprintComponent } from './public/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './public/privacy-policy/privacy-policy.component';
+import { antiAuthGuard } from './shared/guards/anti-auth.guard';
 import { authGuard } from './shared/guards/auth.guard';
 
 const authRoute: Route = {
   path: 'auth',
   component: AuthComponent,
+  canActivate: [antiAuthGuard],
   children: [
     {
       path: 'login',
