@@ -1,35 +1,13 @@
 import { Component } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { BadgeModule } from 'primeng/badge';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
-import { CarouselModule } from 'primeng/carousel';
-import { InputTextModule } from 'primeng/inputtext';
-import { MeterGroupModule } from 'primeng/metergroup';
-import { SkeletonModule } from 'primeng/skeleton';
-import { TableModule } from 'primeng/table';
-import { ErrorWrapperComponent } from '../../../shared/form/error-wrapper/error-wrapper.component';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '../../../shared/form/Validators';
+import { NamiImportComponent } from './import/nami-import.component';
 import { NamiOverviewComponent } from './overview/nami-overview.component';
 
 @Component({
   selector: 'sv-nami',
-  imports: [
-    TableModule,
-    CommonModule,
-    ButtonModule,
-    BadgeModule,
-    MeterGroupModule,
-    CardModule,
-    CarouselModule,
-    ErrorWrapperComponent,
-    InputTextModule,
-    SkeletonModule,
-    ReactiveFormsModule,
-    NamiOverviewComponent,
-  ],
+  imports: [NamiOverviewComponent, NamiImportComponent],
   templateUrl: './nami.component.html',
   styleUrl: './nami.component.scss',
 })
