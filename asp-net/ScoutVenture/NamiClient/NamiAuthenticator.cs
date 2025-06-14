@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Security.Authentication;
 using System.Text.Json;
+using NamiClient.Exceptions;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -52,23 +53,23 @@ namespace NamiClient
             switch (response.StatusCode)
             {
                 case HttpStatusCode.NoContent:
-                    throw new Exception("Session activation error");
+                    throw new NamiException("Session activation error");
                 case HttpStatusCode.OK:
                     break;
                 default:
-                    throw new Exception("Unexpected response status code: " + response.StatusCode);
+                    throw new NamiException("Unexpected response status code: " + response.StatusCode);
             }
 
             if (cookieContainer.GetAllCookies().All(c => c.Name != "JSESSIONID"))
             {
-                throw new Exception("No session cookie received");
+                throw new NamiException("No session cookie received");
             }
 
             NamiLoginResponse? namiLoginResponse = JsonSerializer.Deserialize<NamiLoginResponse>(response.Content!);
             
             if (namiLoginResponse == null)
             {
-                throw new Exception("Empty body");
+                throw new NamiException("Empty body");
             }
         }
     }

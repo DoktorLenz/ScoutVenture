@@ -22,10 +22,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppSettings", "AppSettings\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NamiClient", "NamiClient\NamiClient.csproj", "{7D024D51-456E-4AE0-8D2D-89278F85104C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NamiClient", "NamiClient", "{EA3996E6-BBC4-44C8-A9CF-4237EB068835}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NamiClientTest", "NamiClientTest\NamiClientTest.csproj", "{56BEA6E8-0723-4F75-9F67-95A5225682E3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,16 +56,10 @@ Global
 		{7D024D51-456E-4AE0-8D2D-89278F85104C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D024D51-456E-4AE0-8D2D-89278F85104C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D024D51-456E-4AE0-8D2D-89278F85104C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56BEA6E8-0723-4F75-9F67-95A5225682E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56BEA6E8-0723-4F75-9F67-95A5225682E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56BEA6E8-0723-4F75-9F67-95A5225682E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56BEA6E8-0723-4F75-9F67-95A5225682E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7D024D51-456E-4AE0-8D2D-89278F85104C} = {EA3996E6-BBC4-44C8-A9CF-4237EB068835}
-		{56BEA6E8-0723-4F75-9F67-95A5225682E3} = {EA3996E6-BBC4-44C8-A9CF-4237EB068835}
 	EndGlobalSection
 EndGlobal

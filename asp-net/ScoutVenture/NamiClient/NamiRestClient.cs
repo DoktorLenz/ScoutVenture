@@ -1,10 +1,11 @@
 ﻿using System.Net;
 using System.Text.Json;
+using NamiClient.Exceptions;
 using RestSharp;
 
 namespace NamiClient;
 
-public class NamiRestClient : IDisposable
+public sealed class NamiRestClient : IDisposable
 {
     readonly RestClient _restClient;
     
@@ -28,7 +29,21 @@ public class NamiRestClient : IDisposable
         
         if (!response.IsSuccessful) throw new Exception(response.ErrorMessage);
 
-        return response.Content == null ? null : JsonSerializer.Deserialize<NamiDataWrapper>(response.Content);
+        var result = response.Content == null ? null : JsonSerializer.Deserialize<NamiDataWrapper>(response.Content);
+
+        if (result != null)
+        {
+            return result.ResponseType switch
+            {
+                "OK" => result,
+                "ERROR" => throw new NamiSessionExpiredException(),
+                "EXCEPTION" => throw new NamiAccessViolationException(),
+                _ => throw new NamiException(
+                    $"Unhandled responseType: {result.ResponseType}. Message: {response.ErrorMessage}")
+            };
+        }
+
+        return null;
     }
 
     public void Dispose()
