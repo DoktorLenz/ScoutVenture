@@ -1,6 +1,7 @@
 using AppSettings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ScoutVenture.Core;
 using ScoutVenture.Extensions;
 using ScoutVenture.PostgresAdapter;
 using SmtpAdapter;
@@ -24,11 +25,10 @@ namespace ScoutVenture
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<PostgresApplicationDbContext>(options =>
-                options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"),
-                    o => o.SetPostgresVersion(17, 2))
-            );
-
+            
+            builder.AddPostgres();
+            
+            builder.AddServices();
             
             
             var app = builder.Build();
@@ -38,13 +38,10 @@ namespace ScoutVenture
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                
-                app.ApplyMigrations();
             }
-
+            
+            app.ApplyPostgresMigrations();
             app.UseHttpsRedirection();
-            
-            
             
             app.UseRouting();
             app.UsePathBase("/api");
@@ -54,10 +51,11 @@ namespace ScoutVenture
             
             app.MapControllers();
             app.MapIdentityApi<IdentityUser>();
-
             
             app.Run();
         }
+        
+        
     }
 }
 

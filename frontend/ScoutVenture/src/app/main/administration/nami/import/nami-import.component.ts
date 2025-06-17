@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
   FormControl,
@@ -26,7 +27,7 @@ import { ErrorWrapperComponent } from '../../../../shared/form/error-wrapper/err
 })
 export class NamiImportComponent {
   protected importForm = new FormGroup({
-    groupId: new FormControl<string>('', {
+    groupingId: new FormControl<string>('', {
       validators: [Validators.required],
       updateOn: 'blur',
     }),
@@ -40,11 +41,28 @@ export class NamiImportComponent {
     }),
   });
 
+  constructor(private readonly http: HttpClient) {}
+
   protected import() {
     if (this.importForm.valid) {
+      this.http
+        .post('/api/administration/nami/import', this.importForm.value)
+        .subscribe({
+          next: () => {
+            this.importForm.reset();
+            this.importForm.markAsPristine();
+          },
+          error: (error) => {
+            if (error.status === 400) {
+              this.importForm.setErrors({ invalidCredentials: true });
+            } else {
+              this.importForm.setErrors({ unknownError: true });
+            }
+          },
+        });
     } else {
       this.importForm.markAsDirty();
-      this.importForm.controls.groupId.markAsDirty();
+      this.importForm.controls.groupingId.markAsDirty();
       this.importForm.controls.memberId.markAsDirty();
       this.importForm.controls.password.markAsDirty();
     }

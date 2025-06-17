@@ -6,17 +6,17 @@
       aktualisiert, neue hinzugefügt, gelöschte entfernt.</ng-template
     >
     <div class="flex flex-column gap-3 w-full md:w-25rem">
-      <sv-error-wrapper [control]="importForm.controls.groupId">
+      <sv-error-wrapper [control]="importForm.controls.groupingId">
         <ng-template #title>
-          <label class="font-bold" for="groupId">Gruppierungsnummer</label>
+          <label class="font-bold" for="groupingId">Gruppierungsnummer</label>
         </ng-template>
         <ng-template #input>
           <input
             pInputText
-            id="groupId"
+            id="groupingId"
             type="text"
             fluid
-            formControlName="groupId"
+            formControlName="groupingId"
           />
         </ng-template>
       </sv-error-wrapper>

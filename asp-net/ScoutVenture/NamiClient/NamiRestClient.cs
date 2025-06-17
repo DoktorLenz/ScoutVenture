@@ -21,7 +21,7 @@ public sealed class NamiRestClient : IDisposable
         _restClient = new RestClient(options);
     }
 
-    public async Task<NamiDataWrapper?> GetAllNamiMembersOfGrouping(string groupingId)
+    public async Task<NamiDataWrapper> GetAllNamiMembersOfGrouping(string groupingId)
     {
         var request = new RestRequest(NamiApiEndpoints.AllMembersOfGrouping(groupingId));
         
@@ -43,7 +43,7 @@ public sealed class NamiRestClient : IDisposable
             };
         }
 
-        return null;
+        throw new NamiException("Content of request was null.");
     }
 
     public void Dispose()

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ScoutVenture.CoreContracts;
+using ScoutVenture.CoreContracts.Member;
 using ScoutVenture.PostgresAdapter;
 using SmtpAdapter;
 
@@ -29,13 +31,6 @@ namespace ScoutVenture.Extensions
             services.AddTransient<IEmailSender<IdentityUser>, IdentityMailSender>();
             services.AddAuthorization();
             return services;
-        }
-
-        public static void ApplyMigrations(this IApplicationBuilder app)
-        {
-            using IServiceScope scope = app.ApplicationServices.CreateScope();
-            using PostgresApplicationDbContext dbContext = scope.ServiceProvider.GetRequiredService<PostgresApplicationDbContext>();
-            dbContext.Database.Migrate();
         }
     }
 }

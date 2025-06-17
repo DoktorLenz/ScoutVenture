@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppSettings\AppSettings.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\PostgresAdapter\PostgresAdapter.csproj" />
     <ProjectReference Include="..\SmtpAdapter\SmtpAdapter.csproj" />
   </ItemGroup>
