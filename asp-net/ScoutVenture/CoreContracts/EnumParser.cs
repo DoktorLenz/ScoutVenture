@@ -4,7 +4,7 @@ namespace ScoutVenture.CoreContracts
 {
     public static class EnumParser
     {
-        public static Rank? ParseRank(string rank)
+        public static Rank ParseRank(string rank)
         {
             return rank switch
             {
@@ -12,7 +12,7 @@ namespace ScoutVenture.CoreContracts
                 "Jungpfadfinder" => Rank.Jungpfadfinder,
                 "Pfadfinder" => Rank.Pfadi,
                 "Rover" => Rank.Rover,
-                _ => null
+                _ => Rank.None
             };
         }
 

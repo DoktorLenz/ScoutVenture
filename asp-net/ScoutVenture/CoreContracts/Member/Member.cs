@@ -8,14 +8,14 @@ namespace ScoutVenture.CoreContracts.Member
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
         public required DateOnly DateOfBirth { get; set; }
-        public Rank? Rank { get; set; }
+        public required Rank Rank { get; set; }
         public required Gender Gender { get; set; }
 
         public static Member FromNami(NamiMember namiMember)
         {
-            var rank = EnumParser.ParseRank(namiMember.Rank);
-            var gender = EnumParser.ParseGender(namiMember.Gender);
-            
+            Rank rank = EnumParser.ParseRank(namiMember.Rank);
+            Gender gender = EnumParser.ParseGender(namiMember.Gender);
+
             return new Member
             {
                 MemberId = namiMember.MemberId,

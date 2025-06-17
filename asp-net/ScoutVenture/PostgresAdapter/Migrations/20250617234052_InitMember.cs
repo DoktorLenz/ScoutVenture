@@ -15,7 +15,7 @@ namespace ScoutVenture.PostgresAdapter.Migrations
         {
             migrationBuilder.AlterDatabase()
                 .Annotation("Npgsql:Enum:gender", "divers,female,male")
-                .Annotation("Npgsql:Enum:rank", "jungpfadfinder,pfadi,rover,woelfling");
+                .Annotation("Npgsql:Enum:rank", "jungpfadfinder,none,pfadi,rover,woelfling");
 
             migrationBuilder.CreateTable(
                 name: "Members",
@@ -26,7 +26,7 @@ namespace ScoutVenture.PostgresAdapter.Migrations
                     FirstName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
-                    Rank = table.Column<Rank>(type: "rank", nullable: true),
+                    Rank = table.Column<Rank>(type: "rank", nullable: false),
                     Gender = table.Column<Gender>(type: "gender", nullable: false),
                     xmin = table.Column<uint>(type: "xid", rowVersion: true, nullable: false)
                 },
@@ -44,7 +44,7 @@ namespace ScoutVenture.PostgresAdapter.Migrations
 
             migrationBuilder.AlterDatabase()
                 .OldAnnotation("Npgsql:Enum:gender", "divers,female,male")
-                .OldAnnotation("Npgsql:Enum:rank", "jungpfadfinder,pfadi,rover,woelfling");
+                .OldAnnotation("Npgsql:Enum:rank", "jungpfadfinder,none,pfadi,rover,woelfling");
         }
     }
 }

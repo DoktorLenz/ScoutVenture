@@ -22,7 +22,7 @@ namespace ScoutVenture.PostgresAdapter.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "gender", new[] { "divers", "female", "male" });
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "rank", new[] { "jungpfadfinder", "pfadi", "rover", "woelfling" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "rank", new[] { "jungpfadfinder", "none", "pfadi", "rover", "woelfling" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -245,7 +245,7 @@ namespace ScoutVenture.PostgresAdapter.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<Rank?>("Rank")
+                    b.Property<Rank>("Rank")
                         .HasColumnType("rank");
 
                     b.Property<uint>("Version")

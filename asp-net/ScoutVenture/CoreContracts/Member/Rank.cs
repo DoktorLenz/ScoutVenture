@@ -5,6 +5,7 @@
         Woelfling = 0,
         Jungpfadfinder = 1,
         Pfadi = 2,
-        Rover = 3
+        Rover = 3,
+        None = 4
     }
 }
