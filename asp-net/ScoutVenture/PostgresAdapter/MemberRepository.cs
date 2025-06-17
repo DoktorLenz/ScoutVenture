@@ -6,18 +6,33 @@ namespace ScoutVenture.PostgresAdapter
 {
     public class MemberRepository(PostgresApplicationDbContext context) : IMemberRepository
     {
-        public async Task ImportMembersAsync(IEnumerable<Member> members, CancellationToken cancellationToken = default)
+        public async Task ImportMembersAsync(IEnumerable<Member> importList,
+            CancellationToken cancellationToken = default)
         {
-            // var importedList = members.ToList();
-            // var importedIds = importedList.Select(m => m.MemberId).ToHashSet();
-            //
-            // var existingMembers = await context.Members.ToListAsync(cancellationToken);
-            // var existingMap = existingMembers.ToDictionary(m => m.MemberId);
-            //
-            // var toDelete = existingMembers.Where(m => !importedIds.Contains(m.MemberId)).ToList();
-            // context.Members.RemoveRange(toDelete);
+            List<Member> importMembers = importList.ToList();
+            List<long> importMemberIds = importMembers.Select(m => m.MemberId).ToList();
 
-            await context.Members.AddRangeAsync(members.Select(MemberDto.FromDo), cancellationToken);
+            await context.Members.Where(m => !importMemberIds.Contains(m.MemberId))
+                .ExecuteDeleteAsync(cancellationToken);
+
+            List<MemberDto> existingMembers = await context.Members.ToListAsync(cancellationToken);
+
+            List<MemberDto> newMembers = [];
+            foreach (Member import in importMembers)
+            {
+                MemberDto? existing = existingMembers.FirstOrDefault(m => m.MemberId == import.MemberId);
+                if (existing != null)
+                {
+                    // Update properties
+                    existing.ApplyUpdate(import);
+                }
+                else
+                {
+                    newMembers.Add(MemberDto.FromDo(import));
+                }
+            }
+
+            context.Members.AddRange(newMembers);
         }
     }
 }

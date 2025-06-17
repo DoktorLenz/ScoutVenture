@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ScoutVenture.CoreContracts.Member;
 using ScoutVenture.PostgresAdapter.Entities;
 
 namespace ScoutVenture.PostgresAdapter
@@ -11,6 +10,4 @@ namespace ScoutVenture.PostgresAdapter
     {
         public DbSet<MemberDto> Members { get; set; }
     }
-
-
 }

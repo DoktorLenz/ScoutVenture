@@ -42,5 +42,18 @@ namespace ScoutVenture.PostgresAdapter.Entities
                 Gender = member.Gender
             };
         }
+        
+        public void ApplyUpdate(Member member)
+        {
+            if (member.MemberId != MemberId)
+            {
+                throw new ArgumentException("MemberId mismatch");
+            }
+            FirstName = member.FirstName;
+            LastName = member.LastName;
+            DateOfBirth = member.DateOfBirth;
+            Rank = member.Rank;
+            Gender = member.Gender;
+        }
     }
 }
