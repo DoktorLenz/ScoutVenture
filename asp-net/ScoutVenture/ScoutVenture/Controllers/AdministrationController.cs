@@ -10,20 +10,19 @@ namespace ScoutVenture.Controllers
     [Authorize]
     public class AdministrationController(IMemberService memberService) : Controller
     {
-
         [HttpGet("nami/overview")]
-        public async Task<IActionResult> Overview()
+        public async Task<ActionResult<MemberOverviewDto>> Overview()
         {
-            return Ok();
+            MemberOverview overview = await memberService.MemberOverview();
+            return Ok(overview);
         }
-        
-        
-        
+
+
         [HttpPost("nami/import")]
         public async Task<IActionResult> Import(NamiCredentialsDto namiCredentials)
         {
-            await memberService.ImportNami(
-                namiCredentials.MemberId, 
+            await memberService.ImportNamiAsync(
+                namiCredentials.MemberId,
                 namiCredentials.Password,
                 namiCredentials.GroupingId);
             return Ok();

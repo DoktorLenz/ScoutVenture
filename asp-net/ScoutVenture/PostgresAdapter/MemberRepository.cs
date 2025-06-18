@@ -34,5 +34,19 @@ namespace ScoutVenture.PostgresAdapter
 
             context.Members.AddRange(newMembers);
         }
+
+        public async Task<MemberOverview> GetMemberCountAsync(CancellationToken cancellationToken = default)
+        {
+            Dictionary<Rank, int> counts = await context.Members.GroupBy(m => m.Rank)
+                .ToDictionaryAsync(g => g.Key, g => g.Count(), cancellationToken);
+
+            return new MemberOverview
+            {
+                WoelflingCount = counts.GetValueOrDefault(Rank.Woelfling, 0),
+                JungpfadfinderCount = counts.GetValueOrDefault(Rank.Jungpfadfinder, 0),
+                PfadiCount = counts.GetValueOrDefault(Rank.Pfadi, 0),
+                RoverCount = counts.GetValueOrDefault(Rank.Rover, 0)
+            };
+        }
     }
 }

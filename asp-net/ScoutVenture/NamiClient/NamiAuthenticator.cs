@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Security.Authentication;
 using System.Text.Json;
 using NamiClient.Exceptions;
 using RestSharp;
@@ -9,35 +8,43 @@ namespace NamiClient
 {
     public class NamiAuthenticator(string memberId, string password, CookieContainer cookieContainer) : IAuthenticator
     {
-        private bool _authenticated;
         private readonly object _lock = new();
+        private bool _authenticated;
 
         public ValueTask Authenticate(IRestClient client, RestRequest request)
         {
             lock (_lock)
             {
-                if (_authenticated) return ValueTask.CompletedTask;
-                
+                if (_authenticated)
+                {
+                    return ValueTask.CompletedTask;
+                }
+
                 // use a separate client to send authentication request 
-                var loginClientOptions = new RestClientOptions(client.Options.BaseUrl!)
+                RestClientOptions loginClientOptions = new(client.Options.BaseUrl!)
                 {
                     CookieContainer = cookieContainer
                 };
-                
-                using var loginClient = new RestClient(loginClientOptions);
-                
-                var loginRequest = new RestRequest(NamiApiEndpoints.Login, Method.Post);
+
+                using RestClient loginClient = new(loginClientOptions);
+
+                RestRequest loginRequest = new(NamiApiEndpoints.Login, Method.Post);
                 loginRequest.AddHeader("Content-Type", ContentType.FormUrlEncoded);
-                
+
                 loginRequest.AddParameter("username", memberId);
                 loginRequest.AddParameter("password", password);
                 loginRequest.AddParameter("Login", "API");
-                
-                var loginResponse = loginClient.ExecuteAsync(loginRequest).Result;
 
-                var activateLoginRequest = new RestRequest(loginResponse.GetHeaderValue("Location"));
-                var activateLoginResponse = loginClient.ExecuteAsync(activateLoginRequest).Result;
-                
+                RestResponse loginResponse = loginClient.ExecuteAsync(loginRequest).Result;
+
+                if (loginResponse.StatusCode != HttpStatusCode.OK || loginResponse.GetHeaderValue("Location") == null)
+                {
+                    throw new NamiException("Failed to authenticate");
+                }
+
+                RestRequest activateLoginRequest = new(loginResponse.GetHeaderValue("Location"));
+                RestResponse activateLoginResponse = loginClient.ExecuteAsync(activateLoginRequest).Result;
+
                 VerifyLogin(activateLoginResponse);
 
                 _authenticated = true;
@@ -48,7 +55,7 @@ namespace NamiClient
 
         private void VerifyLogin(RestResponse response)
         {
-            var statusCode = response.StatusCode;
+            HttpStatusCode statusCode = response.StatusCode;
 
             switch (response.StatusCode)
             {
@@ -66,7 +73,7 @@ namespace NamiClient
             }
 
             NamiLoginResponse? namiLoginResponse = JsonSerializer.Deserialize<NamiLoginResponse>(response.Content!);
-            
+
             if (namiLoginResponse == null)
             {
                 throw new NamiException("Empty body");

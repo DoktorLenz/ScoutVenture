@@ -2,6 +2,9 @@
 {
     public interface IMemberService
     {
-        Task ImportNami(string username, string password, string groupingId);
+        Task ImportNamiAsync(string username, string password, string groupingId,
+            CancellationToken cancellationToken = default);
+
+        Task<MemberOverview> MemberOverview(CancellationToken cancellationToken = default);
     }
 }
