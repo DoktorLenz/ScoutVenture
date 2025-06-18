@@ -6,7 +6,7 @@
       <span class="text-lg" style="color: var(--color-woelfling)"
         >Wölflinge</span
       >
-      @if(woelfingeCount) {
+      @if(woelfingeCount != null) {
       <span class="text-sm w-max">{{ woelfingeCount }} Mitglieder</span>
       } @else {
       <p-skeleton class="text-sm" width="85px"></p-skeleton>}
@@ -19,7 +19,7 @@
       <span class="text-lg" style="color: var(--color-jungpfadfinder)"
         >Jungpfadfinder</span
       >
-      @if(jungpfadfinderCount) {
+      @if(jungpfadfinderCount != null) {
       <span class="text-sm w-max">{{ jungpfadfinderCount }} Mitglieder</span>
       } @else {
       <p-skeleton class="text-sm" width="85px"></p-skeleton>}
@@ -31,11 +31,9 @@
     <img class="rank-icon bg-pfadfinder" src="/dpsg-lilie_weiß.png" />
 
     <div class="rank-details">
-      <span class="text-lg" style="color: var(--color-pfadfinder)"
-        >Pfadfinder</span
-      >
-      @if(pfadfinderCount) {
-      <span class="text-sm w-max">{{ pfadfinderCount }} Mitglieder</span>
+      <span class="text-lg" style="color: var(--color-pfadfinder)">Pfadis</span>
+      @if(pfadiCount != null) {
+      <span class="text-sm w-max">{{ pfadiCount }} Mitglieder</span>
       } @else {
       <p-skeleton class="text-sm" width="85px"></p-skeleton>}
     </div>
@@ -45,7 +43,7 @@
 
     <div class="rank-details">
       <span class="text-lg" style="color: var(--color-rover)">Rover</span>
-      @if(roverCount) {
+      @if(roverCount != null) {
       <span class="text-sm w-max">{{ roverCount }} Mitglieder</span>
       } @else {
       <p-skeleton class="text-sm" width="85px"></p-skeleton>}

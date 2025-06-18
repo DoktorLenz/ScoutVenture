@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, effect } from '@angular/core';
 import { SkeletonModule } from 'primeng/skeleton';
-import { delay, of } from 'rxjs';
+import { NamiService } from '../nami.service';
 
 @Component({
   selector: 'sv-nami-overview',
@@ -11,23 +12,37 @@ import { delay, of } from 'rxjs';
 export class NamiOverviewComponent {
   protected woelfingeCount: number | null = null;
   protected jungpfadfinderCount: number | null = null;
-  protected pfadfinderCount: number | null = null;
+  protected pfadiCount: number | null = null;
   protected roverCount: number | null = null;
 
-  constructor() {
-    of([])
-      .pipe(delay(3000))
-      .subscribe({
-        next: () => {
-          // Simulate fetching data
-          this.woelfingeCount = 10;
-          this.jungpfadfinderCount = 15;
-          this.pfadfinderCount = 20;
-          this.roverCount = 5;
-        },
-        error: (err) => {
-          console.error('Error fetching Nami data:', err);
-        },
-      });
+  constructor(
+    private readonly http: HttpClient,
+    private readonly namiService: NamiService
+  ) {
+    effect(() => {
+      if (this.namiService.importPending()) {
+        this.woelfingeCount = null;
+        this.jungpfadfinderCount = null;
+        this.pfadiCount = null;
+        this.roverCount = null;
+      } else {
+        this.updateOverview();
+      }
+    });
+  }
+
+  private updateOverview() {
+    this.http.get('/api/administration/nami/overview').subscribe({
+      next: (data: any) => {
+        // Assuming the API returns an object with counts
+        this.woelfingeCount = data.woelflingCount || 0;
+        this.jungpfadfinderCount = data.jungpfadfinderCount || 0;
+        this.pfadiCount = data.pfadiCount || 0;
+        this.roverCount = data.roverCount || 0;
+      },
+      error: (err) => {
+        console.error('Error fetching Nami overview:', err);
+      },
+    });
   }
 }

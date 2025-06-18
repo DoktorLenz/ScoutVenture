@@ -11,6 +11,7 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ErrorWrapperComponent } from '../../../../shared/form/error-wrapper/error-wrapper.component';
+import { NamiService } from '../nami.service';
 
 @Component({
   selector: 'sv-nami-import',
@@ -41,7 +42,10 @@ export class NamiImportComponent {
     }),
   });
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly namiService: NamiService
+  ) {}
 
   protected import() {
     if (this.importForm.valid) {
@@ -58,6 +62,9 @@ export class NamiImportComponent {
             } else {
               this.importForm.setErrors({ unknownError: true });
             }
+          },
+          complete: () => {
+            this.namiService.importPending.set(false);
           },
         });
     } else {
