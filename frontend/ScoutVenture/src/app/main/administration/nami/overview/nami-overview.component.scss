@@ -20,11 +20,36 @@
   border-bottom-left-radius: 8px;
 }
 
+.rank-icon-sm {
+  padding: 0.5rem;
+  height: 40px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
 .rank-details {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  min-width: 139px;
+  min-width: 100px;
+}
+
+.container-1 {
+  display: flex;
+  flex: 2 1 0%;
+  gap: 1rem;
+}
+
+.container-2 {
+  display: flex;
+  flex: 2 1 0%;
+  gap: 1rem;
+}
+
+.container-3 {
+  display: flex;
+  flex: 1 1 0%;
+  gap: 1rem;
 }

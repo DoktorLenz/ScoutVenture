@@ -14,7 +14,14 @@ namespace ScoutVenture.Controllers
         public async Task<ActionResult<MemberOverviewDto>> Overview()
         {
             MemberOverview overview = await memberService.MemberOverview();
-            return Ok(overview);
+            return new MemberOverviewDto
+            {
+                WoelflingCount = overview.WoelflingCount,
+                JungpfadfinderCount = overview.JungpfadfinderCount,
+                PfadiCount = overview.PfadiCount,
+                RoverCount = overview.RoverCount,
+                NoneCount = overview.NoneCount
+            };
         }
 
 

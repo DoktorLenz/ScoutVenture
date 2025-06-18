@@ -12,6 +12,7 @@
   --color-jungpfadfinder: #2f53a7;
   --color-pfadfinder: #00823c;
   --color-rover: #cc1f2f;
+  --color-leiter: #9d9d9c;
 }
 
 .bg-woelfling {
@@ -28,6 +29,10 @@
 
 .bg-rover {
   background-color: var(--color-rover) !important;
+}
+
+.bg-leiter {
+  background-color: var(--color-leiter) !important;
 }
 
 .primary-link {

@@ -6,5 +6,6 @@
         public int JungpfadfinderCount { get; set; }
         public int PfadiCount { get; set; }
         public int RoverCount { get; set; }
+        public int NoneCount { get; set; }
     }
 }

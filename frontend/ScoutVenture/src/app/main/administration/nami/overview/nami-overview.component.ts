@@ -14,6 +14,7 @@ export class NamiOverviewComponent {
   protected jungpfadfinderCount: number | null = null;
   protected pfadiCount: number | null = null;
   protected roverCount: number | null = null;
+  protected noneCount: number | null = null;
 
   constructor(
     private readonly http: HttpClient,
@@ -25,6 +26,7 @@ export class NamiOverviewComponent {
         this.jungpfadfinderCount = null;
         this.pfadiCount = null;
         this.roverCount = null;
+        this.noneCount = null;
       } else {
         this.updateOverview();
       }
@@ -39,6 +41,7 @@ export class NamiOverviewComponent {
         this.jungpfadfinderCount = data.jungpfadfinderCount || 0;
         this.pfadiCount = data.pfadiCount || 0;
         this.roverCount = data.roverCount || 0;
+        this.noneCount = data.noneCount || 0;
       },
       error: (err) => {
         console.error('Error fetching Nami overview:', err);

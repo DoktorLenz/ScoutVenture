@@ -45,7 +45,8 @@ namespace ScoutVenture.PostgresAdapter
                 WoelflingCount = counts.GetValueOrDefault(Rank.Woelfling, 0),
                 JungpfadfinderCount = counts.GetValueOrDefault(Rank.Jungpfadfinder, 0),
                 PfadiCount = counts.GetValueOrDefault(Rank.Pfadi, 0),
-                RoverCount = counts.GetValueOrDefault(Rank.Rover, 0)
+                RoverCount = counts.GetValueOrDefault(Rank.Rover, 0),
+                NoneCount = counts.GetValueOrDefault(Rank.None, 0)
             };
         }
     }
