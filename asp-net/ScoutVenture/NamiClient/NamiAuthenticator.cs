@@ -37,10 +37,23 @@ namespace NamiClient
 
                 RestResponse loginResponse = loginClient.ExecuteAsync(loginRequest).Result;
 
+                if (loginResponse.StatusCode == HttpStatusCode.OK)
+                {
+                    NamiErrorWrapper? responseContent =
+                        JsonSerializer.Deserialize<NamiErrorWrapper>(loginResponse.Content!);
+                    if (responseContent != null)
+                    {
+                        throw new NamiAuthenticationException(
+                            $"Failed to authenticate. StatusCode \"{responseContent.StatusCode}\": {responseContent.StatusMessage}");
+                    }
+
+                    throw new NamiException("Unknown error: HttpStatusCode 200 OK");
+                }
+
                 if (loginResponse.StatusCode != HttpStatusCode.Found ||
                     loginResponse.GetHeaderValue("Location") == null)
                 {
-                    throw new NamiException("Failed to authenticate");
+                    throw new NamiException($"Unknown error: HttpStatusCode {loginResponse.StatusCode}");
                 }
 
                 RestRequest activateLoginRequest = new(loginResponse.GetHeaderValue("Location"));
