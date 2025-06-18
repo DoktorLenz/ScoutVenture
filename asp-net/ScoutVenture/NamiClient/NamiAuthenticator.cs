@@ -37,7 +37,8 @@ namespace NamiClient
 
                 RestResponse loginResponse = loginClient.ExecuteAsync(loginRequest).Result;
 
-                if (loginResponse.StatusCode != HttpStatusCode.OK || loginResponse.GetHeaderValue("Location") == null)
+                if (loginResponse.StatusCode != HttpStatusCode.Found ||
+                    loginResponse.GetHeaderValue("Location") == null)
                 {
                     throw new NamiException("Failed to authenticate");
                 }
