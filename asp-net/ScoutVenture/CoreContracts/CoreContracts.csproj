@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ScoutVenture.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <AssemblyName>ScoutVenture.$(MSBuildProjectName)</AssemblyName>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NamiClient\NamiClient.csproj" />
+  </ItemGroup>
+
+</Project>

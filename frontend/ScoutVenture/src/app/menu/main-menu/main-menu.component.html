@@ -1,0 +1,73 @@
+<p-menu
+  [model]="items"
+  class="flex justify-center h-full"
+  styleClass="w-full h-full"
+>
+  <ng-template #start>
+    <div class="content-header flex mx-1 px-1 align-items-center">
+      <span class="text-xl font-semibold flex-grow-1 py-2">ScoutVenture</span>
+      <i
+        class="pi pi-times flex-none text-2xl px-1 xl:hidden"
+        (click)="close.emit($event)"
+      ></i>
+    </div>
+  </ng-template>
+  <ng-template #submenuheader let-item>
+    <span class="text-primary font-bold">{{ item.label }}</span>
+  </ng-template>
+  <ng-template #item let-item>
+    <a
+      pRipple
+      class="flex items-center p-menu-item-link"
+      [routerLink]="item.routerLink"
+      (click)="close.emit($event)"
+    >
+      <span [class]="item.icon"></span>
+      <span class="ml-2">{{ item.label }}</span>
+      @if(item.badge) {
+      <p-badge *ngIf="item.badge" class="ml-auto" [value]="item.badge" />
+      } @if(item.shortcut){
+      <span
+        class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1"
+      >
+        {{ item.shortcut }}
+      </span>
+      }
+    </a>
+  </ng-template>
+  <ng-template #end>
+    <div class="flex flex-row align-items-center mx-1 px-1 content-footer">
+      <p-avatar
+        class="flex-none"
+        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+        class="mr-2"
+        shape="circle"
+      />
+      <span class="inline-flex flex-column flex-grow-1">
+        <span class="font-bold">Amy Elsner</span>
+        <span class="text-sm">Admin</span>
+      </span>
+      <!-- <i class="pi pi-sign-out flex-none mr-2" (click)="close.emit($event)"></i> -->
+      <p-button
+        icon="pi pi-sign-out"
+        [text]="true"
+        (onClick)="logout()"
+      ></p-button>
+    </div>
+    <div class="flex justify-content-around">
+      <a
+        class="primary-link text-xs"
+        routerLink="/imprint"
+        (click)="close.emit($event)"
+        >Impressum</a
+      >
+      <a
+        class="primary-link text-xs"
+        routerLink="/privacy-policy"
+        (click)="close.emit($event)"
+      >
+        Datenschutz
+      </a>
+    </div>
+  </ng-template>
+</p-menu>

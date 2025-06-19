@@ -1,0 +1,73 @@
+<form [formGroup]="importForm" (ngSubmit)="import()">
+  <p-card>
+    <ng-template #title>Neu Importieren</ng-template>
+    <ng-template #subtitle
+      >Importiere Mitglieder aus der NaMi. Mitglieder werden aktualisiert,
+      hinzugefügt und gelöscht.</ng-template
+    >
+    <div class="flex flex-column gap-3 w-full md:w-25rem">
+      <sv-error-wrapper [control]="importForm.controls.groupingId">
+        <ng-template #title>
+          <label class="font-bold" for="groupingId">Gruppierungsnummer</label>
+        </ng-template>
+        <ng-template #input>
+          <input
+            pInputText
+            id="groupingId"
+            type="text"
+            fluid
+            formControlName="groupingId"
+          />
+        </ng-template>
+      </sv-error-wrapper>
+
+      <sv-error-wrapper [control]="importForm.controls.memberId">
+        <ng-template #title>
+          <label class="font-bold" for="memberId">Mitgliedsnummer</label>
+        </ng-template>
+        <ng-template #input>
+          <input
+            pInputText
+            id="memberId"
+            type="text"
+            fluid
+            formControlName="memberId"
+          />
+        </ng-template>
+      </sv-error-wrapper>
+
+      <sv-error-wrapper [control]="importForm.controls.password">
+        <ng-template #title>
+          <label class="font-bold" for="password">Passwort</label>
+        </ng-template>
+        <ng-template #input>
+          <p-password
+            inputId="password"
+            fluid
+            feedback="false"
+            toggleMask="true"
+            autocomplete="current-password"
+            inputmode="text"
+            formControlName="password"
+          ></p-password>
+        </ng-template>
+      </sv-error-wrapper>
+
+      @if(importForm.errors){
+      <sv-error-summary [group]="importForm"></sv-error-summary>
+      }
+    </div>
+
+    <ng-template #footer>
+      <div
+        class="w-full flex flex-row align-items-center justify-content-start"
+      >
+        <p-button
+          label="Importieren"
+          type="submit"
+          [disabled]="importForm.disabled"
+        ></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+</form>

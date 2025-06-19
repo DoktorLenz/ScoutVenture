@@ -14,10 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  JAVA_VERSION: "21"
-  JAVA_DISTRIBUTION: "temurin"
-  JAVA_CACHE: maven
-  NODE_VERSION: 20
+  NODE_VERSION: 22
 
 jobs:
   build-frontend:
@@ -25,12 +22,12 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./angular
+        working-directory: ./frontend/ScoutVenture
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@v4 # v4
 
       - name: Cache node modules
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
+        uses: actions/cache@v4 # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -38,7 +35,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        uses: actions/setup-node@v4 # v4
         with:
           node-version: ${{ env.NODE_VERSION }}
 
@@ -51,63 +48,18 @@ jobs:
       - name: Build Application
         run: npm run ci:build
 
-  sonar-frontend:
-    name: Sonar Frontend
-    needs: build-frontend
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./angular
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          fetch-depth: 0
-
-      - name: Cache node modules
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Clean Distribution Directory
-        run: npm run ci:clean
-
-      - name: Run Linter
-        run: npm run ci:lint
-
-      - name: Change eslint relative to absolute path
-        run: sed -i 's+/home/runner/work/scoutventure/scoutventure/+/github/workspace/+g' eslint/result.json
-
-      - name: Upload to Sonar
-        uses: SonarSource/sonarcloud-github-action@master
-        with:
-          projectBaseDir: angular/
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
   unit-test-frontend:
     name: Unit Test Frontend
     needs: build-frontend
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./angular
+        working-directory: ./frontend/ScoutVenture
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@v4 # v4
 
       - name: Cache node modules
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
+        uses: actions/cache@v4 # v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -115,7 +67,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        uses: actions/setup-node@v4 # v4
         with:
           node-version: ${{ env.NODE_VERSION }}
 
@@ -129,160 +81,29 @@ jobs:
         run: npm run ci:test
 
       - name: Upload converage reports to Codecov
-        uses: codecov/codecov-action@13ce06bfc6bbe3ecf90edbbf1bc32fe5978ca1d3 # v5
+        uses: codecov/codecov-action@v5 # v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ github.workspace }}/angular/coverage/cobertura/cobertura-coverage.xml
+          files: ${{ github.workspace }}/frontend/Scoutventure/coverage/cobertura/cobertura-coverage.xml
           flags: Frontend-Unit-Test
           fail_ci_if_error: true
 
   build-backend:
-    name: Build Spring-Boot Backend
+    name: Build .NET Backend
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./spring
+        working-directory: ./asp-net/ScoutVenture
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@v4 # v4
 
-      - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4
+      - name: Setup ..NET
+        uses: actions/setup-dotnet@v4 # v4
         with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          cache: ${{ env.JAVA_CACHE }}
+          dotnet-version: "9.0.x"
 
-      - name: Cache Maven packages
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+      - name: Restore Dependencies
+        run: dotnet restore
 
-      - name: Build with Maven
-        run: mvn clean package -DskipTests
-
-  unit-test-backend:
-    name: Unit Test Backend
-    needs: build-backend
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./spring
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          cache: ${{ env.JAVA_CACHE }}
-
-      - name: Cache Maven packages
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Cache SonarCloud packages
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Compile Tests
-        run: mvn clean resources:testResources compiler:compile compiler:testCompile
-
-      - name: Run Unit Tests and Upload to Sonar
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn jacoco:prepare-agent surefire:test jacoco:report org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@13ce06bfc6bbe3ecf90edbbf1bc32fe5978ca1d3 # v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ github.workspace }}/spring/target/site/jacoco/jacoco.xml
-          flags: Backend-Unit-Test
-          fail_ci_if_error: true
-
-  integration-test-backend:
-    name: Integration Test Backend
-    needs: build-backend
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./spring
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-
-      - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          cache: ${{ env.JAVA_CACHE }}
-
-      - name: Cache Maven packages
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Cache SonarCloud packages
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Compile Tests
-        run: mvn test-compile
-
-      - name: Run Integration Tests
-        run: mvn jacoco:prepare-agent-integration failsafe:integration-test jacoco:report-integration
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@13ce06bfc6bbe3ecf90edbbf1bc32fe5978ca1d3 # v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ github.workspace }}/spring/target/site/jacoco-it/jacoco.xml
-          flags: Backend-Integration-Test
-          fail_ci_if_error: true
-
-  arch-test-backend:
-    name: ArchUnit Test Backend
-    needs: build-backend
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./spring
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-
-      - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          cache: ${{ env.JAVA_CACHE }}
-
-      - name: Cache Maven packages
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Compile Tests
-        run: mvn test-compile
-
-      - name: Run ArchUnit Tests
-        run: mvn arch-unit:arch-test
+      - name: Build Application
+        run: dotnet build --configuration Release --no-restore

@@ -1,0 +1,74 @@
+<div class="flex flex-column justify-content-center align-items-center">
+  <form
+    class="w-full md:w-25rem"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <p-card>
+      <ng-template #title>ScoutVenture</ng-template>
+      <ng-template #subtitle>Bitte melde dich an</ng-template>
+      <ng-template #content>
+        <div class="flex flex-column gap-3">
+          <sv-error-wrapper [control]="loginForm.controls.email">
+            <ng-template #title>
+              <label class="font-bold" for="username">E-Mail</label>
+            </ng-template>
+            <ng-template #input>
+              <input
+                pInputText
+                id="username"
+                type="text"
+                fluid
+                autocomplete="email"
+                inputmode="email"
+                formControlName="email"
+              />
+            </ng-template>
+          </sv-error-wrapper>
+
+          <sv-error-wrapper [control]="loginForm.controls.password">
+            <ng-template #title>
+              <label class="font-bold" for="password">Passwort</label>
+            </ng-template>
+            <ng-template #input>
+              <p-password
+                inputId="password"
+                fluid
+                feedback="false"
+                toggleMask="true"
+                autocomplete="current-password"
+                inputmode="text"
+                formControlName="password"
+              />
+            </ng-template>
+          </sv-error-wrapper>
+
+          @if(loginForm.errors){
+          <sv-error-summary [group]="loginForm"></sv-error-summary>
+          } @if(showPasswordResetLink){
+          <a class="primary-link" routerLink="/auth/forgotPassword">
+            Passwort zurücksetzen?
+          </a>
+          }
+        </div>
+      </ng-template>
+      <ng-template #footer>
+        <div
+          class="w-full flex flex-row align-items-center justify-content-between"
+          fluid
+        >
+          <p-button label="Anmelden" type="submit"></p-button>
+          <a class="primary-link" routerLink="/auth/register">
+            Jetzt registrieren!
+          </a>
+        </div>
+      </ng-template>
+    </p-card>
+  </form>
+  <div class="flex gap-4 mt-1">
+    <a class="secondary-link" routerLink="/public/imprint">Impressum</a>
+    <a class="secondary-link" routerLink="/public/privacy-policy">
+      Datenschutz
+    </a>
+  </div>
+</div>

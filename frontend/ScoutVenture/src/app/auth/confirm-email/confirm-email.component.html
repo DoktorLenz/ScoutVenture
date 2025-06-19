@@ -1,0 +1,33 @@
+<div class="flex flex-column justify-content-center align-items-center">
+  <p-card class="w-full md:w-25rem">
+    <ng-template #title>ScoutVenture</ng-template>
+    <ng-template #content>
+      @if(confirmationSuccess) {
+      <p>Du hast deine E-Mail Adresse erfolgreich bestätigt.</p>
+      } @else {
+      <p>
+        Deine E-Mail Adresse konnte nicht bestätigt werden. Bitte versuche es
+        später nochmal.
+      </p>
+      }
+    </ng-template>
+    <ng-template #footer>
+      <div
+        class="w-full flex flex-row align-items-center justify-content-between"
+        fluid
+      >
+        <p-button
+          label="Zurück zum Login"
+          (onClick)="redirectLogin()"
+        ></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+
+  <div class="flex gap-4 mt-1">
+    <a class="secondary-link" routerLink="/public/imprint">Impressum</a>
+    <a class="secondary-link" routerLink="/public/privacy-policy">
+      Datenschutz
+    </a>
+  </div>
+</div>

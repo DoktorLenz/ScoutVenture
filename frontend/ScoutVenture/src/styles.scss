@@ -1,0 +1,82 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeflex/primeflex.css";
+@import "primeicons/primeicons.css";
+
+:root {
+  font-family: "PT Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: var(--p-surface-700);
+
+  --color-woelfling: #ff6400;
+  --color-jungpfadfinder: #2f53a7;
+  --color-pfadfinder: #00823c;
+  --color-rover: #cc1f2f;
+  --color-leiter: #9d9d9c;
+}
+
+.bg-woelfling {
+  background-color: var(--color-woelfling) !important;
+}
+
+.bg-jungpfadfinder {
+  background-color: var(--color-jungpfadfinder) !important;
+}
+
+.bg-pfadfinder {
+  background-color: var(--color-pfadfinder) !important;
+}
+
+.bg-rover {
+  background-color: var(--color-rover) !important;
+}
+
+.bg-leiter {
+  background-color: var(--color-leiter) !important;
+}
+
+.primary-link {
+  color: var(--p-primary-color);
+}
+
+.secondary-link {
+  color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+sv-main-menu {
+  .p-menu.p-component {
+    display: flex;
+    flex-flow: column;
+
+    .p-menu-list {
+      flex-grow: 1;
+      overflow: auto;
+    }
+  }
+}
+
+sv-main {
+  #menuDialog > .p-dialog-mask > .p-dialog.p-component {
+    border: none;
+    width: 100%;
+    height: 100%;
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+}
+
+.p-drawer.p-drawer-active.p-drawer-full {
+  background-color: transparent;
+  padding: 8px;
+  outline: none;
+  border: none;
+}
+
+.p-overlay-mask.p-drawer-mask {
+  display: none;
+}

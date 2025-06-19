@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{8B02D52A-8374-458A-BBF5-2C7087BF2A00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgresAdapter", "PostgresAdapter\PostgresAdapter.csproj", "{C2059215-BB33-469B-9BB4-F0AC59812303}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreContracts", "CoreContracts\CoreContracts.csproj", "{68710D12-990F-424D-92EC-4E1D2872F956}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoutVenture", "ScoutVenture\ScoutVenture.csproj", "{4D017FBF-973E-4AB1-8AFA-F0100F13C6D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{59A6928A-D7EB-44BB-ACF3-7D0899EC1257}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmtpAdapter", "SmtpAdapter\SmtpAdapter.csproj", "{B6701464-6385-49DB-A07D-006E54294816}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppSettings", "AppSettings\AppSettings.csproj", "{A856E358-3974-420C-BF66-B18946F33FCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NamiClient", "NamiClient\NamiClient.csproj", "{7D024D51-456E-4AE0-8D2D-89278F85104C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B02D52A-8374-458A-BBF5-2C7087BF2A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B02D52A-8374-458A-BBF5-2C7087BF2A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B02D52A-8374-458A-BBF5-2C7087BF2A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B02D52A-8374-458A-BBF5-2C7087BF2A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2059215-BB33-469B-9BB4-F0AC59812303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2059215-BB33-469B-9BB4-F0AC59812303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2059215-BB33-469B-9BB4-F0AC59812303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2059215-BB33-469B-9BB4-F0AC59812303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68710D12-990F-424D-92EC-4E1D2872F956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68710D12-990F-424D-92EC-4E1D2872F956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68710D12-990F-424D-92EC-4E1D2872F956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68710D12-990F-424D-92EC-4E1D2872F956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D017FBF-973E-4AB1-8AFA-F0100F13C6D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D017FBF-973E-4AB1-8AFA-F0100F13C6D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D017FBF-973E-4AB1-8AFA-F0100F13C6D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D017FBF-973E-4AB1-8AFA-F0100F13C6D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6701464-6385-49DB-A07D-006E54294816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6701464-6385-49DB-A07D-006E54294816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6701464-6385-49DB-A07D-006E54294816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6701464-6385-49DB-A07D-006E54294816}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A856E358-3974-420C-BF66-B18946F33FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A856E358-3974-420C-BF66-B18946F33FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A856E358-3974-420C-BF66-B18946F33FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A856E358-3974-420C-BF66-B18946F33FCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D024D51-456E-4AE0-8D2D-89278F85104C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D024D51-456E-4AE0-8D2D-89278F85104C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D024D51-456E-4AE0-8D2D-89278F85104C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D024D51-456E-4AE0-8D2D-89278F85104C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal

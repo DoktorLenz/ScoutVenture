@@ -3,6 +3,18 @@
 #
 version: "3.9"
 services:
+  reverse-proxy:
+    container_name: traefik_dev
+    image: traefik:v3.3
+    command:
+      - "--api.insecure=true"  # Enable Traefik Dashboard
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../../docker/traefik:/etc/traefik
+
   backend_db:
     container_name: database_dev
     image: postgres:17.5-alpine@sha256:f325a29ec9deb7039c5f07761d77d79d537dac836ecd99f982f6ca5476724604
@@ -12,33 +24,19 @@ services:
       - POSTGRES_DB=scoutventure
     restart: unless-stopped
     ports:
-      - "35432:5432"
-  kc_database:
-    container_name: kc_database
-    image: postgres:17.5-alpine@sha256:f325a29ec9deb7039c5f07761d77d79d537dac836ecd99f982f6ca5476724604
-    environment:
-      - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD=keycloak
-      - POSTGRES_DB=keycloak
-    restart: unless-stopped
-    ports:
       - "5432:5432"
-  kc_keycloak:
-    container_name: kc_keycloak
-    image: quay.io/keycloak/keycloak:26.2.5@sha256:4883630ef9db14031cde3e60700c9a9a8eaf1b5c24db1589d6a2d43de38ba2a9
-    environment:
-      - KEYCLOAK_IMPORT=/opt/keycloak/data/import/realm-scoutventure.json
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
-      - KC_DB=postgres
-      - KC_DB_URL=jdbc:postgresql://kc_database:5432/keycloak
-      - KC_DB_USERNAME=keycloak
-      - KC_DB_PASSWORD=keycloak
+    command: ["postgres", "-c", "log_statement=all"]
+
+  mailpit:
+    container_name: mailpit_dev
+    image: axllent/mailpit:latest
     restart: unless-stopped
     volumes:
-      - ../../docker/keycloak/realm-scoutventure.json:/opt/keycloak/data/import/realm-scoutventure.json
-    command: start-dev --import-realm --verbose
+      - ../../docker/mailpit/data:/data
     ports:
-      - "8080:8080"
-    depends_on:
-      - kc_database
+      - "1025:1025"
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
