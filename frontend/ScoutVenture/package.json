@@ -7,7 +7,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "ci:clean": "rimraf ./dist && rimraf ./coverage",
+    "ci:build": "ng build",
+    "ci:test": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
+    "ci:lint": "ng lint --format json --output-file /eslint/result.json"
   },
   "private": true,
   "dependencies": {
