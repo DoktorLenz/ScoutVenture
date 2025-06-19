@@ -2,8 +2,8 @@
   <p-card>
     <ng-template #title>Neu Importieren</ng-template>
     <ng-template #subtitle
-      >Importiere Mitglieder aus der NaMi. Bestehende Mitglieder werden
-      aktualisiert, neue hinzugefügt, gelöschte entfernt.</ng-template
+      >Importiere Mitglieder aus der NaMi. Mitglieder werden aktualisiert,
+      hinzugefügt und gelöscht.</ng-template
     >
     <div class="flex flex-column gap-3 w-full md:w-25rem">
       <sv-error-wrapper [control]="importForm.controls.groupingId">
@@ -52,13 +52,21 @@
           ></p-password>
         </ng-template>
       </sv-error-wrapper>
+
+      @if(importForm.errors){
+      <sv-error-summary [group]="importForm"></sv-error-summary>
+      }
     </div>
 
     <ng-template #footer>
       <div
         class="w-full flex flex-row align-items-center justify-content-start"
       >
-        <p-button label="Importieren" type="submit"></p-button>
+        <p-button
+          label="Importieren"
+          type="submit"
+          [disabled]="importForm.disabled"
+        ></p-button>
       </div>
     </ng-template>
   </p-card>
