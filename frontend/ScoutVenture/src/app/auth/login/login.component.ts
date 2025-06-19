@@ -10,6 +10,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { FluidModule } from 'primeng/fluid';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import { ErrorSummaryComponent } from '../../shared/form/error-summary/error-summary.component';
 import { ErrorWrapperComponent } from '../../shared/form/error-wrapper/error-wrapper.component';
 import { Validators } from '../../shared/form/Validators';
 
@@ -26,6 +27,7 @@ import { Validators } from '../../shared/form/Validators';
     AutoFocusModule,
     ReactiveFormsModule,
     ErrorWrapperComponent,
+    ErrorSummaryComponent,
     CommonModule,
   ],
   templateUrl: './login.component.html',
@@ -35,13 +37,15 @@ export class LoginComponent {
   protected loginForm = new FormGroup({
     email: new FormControl<string>('', {
       validators: [Validators.required],
-      updateOn: 'blur',
+      updateOn: 'change',
     }),
     password: new FormControl<string>('', {
       validators: [Validators.required],
-      updateOn: 'blur',
+      updateOn: 'change',
     }),
   });
+
+  protected showPasswordResetLink = false;
 
   constructor(
     private readonly http: HttpClient,
@@ -57,13 +61,14 @@ export class LoginComponent {
             this.router.navigate(['/']);
           },
           error: () => {
+            this.showPasswordResetLink = true;
             this.loginForm.setErrors({ invalidCredentials: true });
-            this.loginForm.controls.password.setErrors({
-              invalidCredentials: true,
-            });
-            this.loginForm.controls.email.setErrors({
-              invalidCredentials: true,
-            });
+            // this.loginForm.controls.password.setErrors({
+            //   invalidCredentials: true,
+            // });
+            // this.loginForm.controls.email.setErrors({
+            //   invalidCredentials: true,
+            // });
           },
         });
     } else {

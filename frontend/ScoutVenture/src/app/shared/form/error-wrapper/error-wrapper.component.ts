@@ -17,11 +17,4 @@ export class ErrorWrapperComponent {
 
   @ContentChild('title', { static: false }) title: TemplateRef<any> | null =
     null;
-
-  @ContentChild('errorMessage', { static: false })
-  errorMessage: TemplateRef<any> | null = null;
-
-  ngAfterContentInit() {
-    console.log(this.errorMessage);
-  }
 }

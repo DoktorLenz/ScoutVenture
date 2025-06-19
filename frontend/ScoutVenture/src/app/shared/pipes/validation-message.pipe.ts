@@ -5,9 +5,9 @@ import { ValidationErrors } from '@angular/forms';
   name: 'validationMessage',
 })
 export class ValidationMessagePipe implements PipeTransform {
-  transform(errors: ValidationErrors | null): string {
+  transform(errors: ValidationErrors | null | undefined): string {
     const errorMessages = [];
-    if (errors === null) {
+    if (errors == null) {
       return '';
     }
     if (errors['required']) {

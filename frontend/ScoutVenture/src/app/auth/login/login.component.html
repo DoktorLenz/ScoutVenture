@@ -43,7 +43,9 @@
             </ng-template>
           </sv-error-wrapper>
 
-          @if(loginForm.errors?.['invalidCredentials']){
+          @if(loginForm.errors){
+          <sv-error-summary [group]="loginForm"></sv-error-summary>
+          } @if(showPasswordResetLink){
           <a class="primary-link" routerLink="/auth/forgotPassword">
             Passwort zurücksetzen?
           </a>
