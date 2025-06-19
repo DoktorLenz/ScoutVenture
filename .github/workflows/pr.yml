@@ -14,10 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  JAVA_VERSION: "21"
-  JAVA_DISTRIBUTION: "temurin"
-  JAVA_CACHE: maven
-  NODE_VERSION: 20
+  NODE_VERSION: 22
 
 jobs:
   build-frontend:
@@ -25,43 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./angular
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-
-      - name: Cache node modules
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Clean Distribution Directory
-        run: npm run ci:clean
-
-      - name: Build Application
-        run: npm run ci:build
-
-  sonar-frontend:
-    name: Sonar Frontend
-    needs: build-frontend
-    runs-on: ubuntu-latest
-    defaults:
-      run:
         working-directory: ./frontend/ScoutVenture
     steps:
       - uses: actions/checkout@v4 # v4
-        with:
-          fetch-depth: 0
 
       - name: Cache node modules
         uses: actions/cache@v4 # v4
@@ -81,6 +44,9 @@ jobs:
 
       - name: Clean Distribution Directory
         run: npm run ci:clean
+
+      - name: Build Application
+        run: npm run ci:build
 
   unit-test-frontend:
     name: Unit Test Frontend
