@@ -3,51 +3,58 @@ using System.Text.Json;
 using NamiClient.Exceptions;
 using RestSharp;
 
-namespace NamiClient;
-
-public sealed class NamiRestClient : IDisposable
+namespace NamiClient
 {
-    readonly RestClient _restClient;
-    
-    public NamiRestClient(string memberId, string password)
+    public sealed class NamiRestClient : IDisposable
     {
-        var cookieContainer = new CookieContainer();
-        var options = new RestClientOptions("https://nami.dpsg.de")
+        private readonly RestClient _restClient;
+
+        public NamiRestClient(string memberId, string password)
         {
-            CookieContainer = cookieContainer,
-            FollowRedirects = false,
-            Authenticator = new NamiAuthenticator(memberId, password, cookieContainer)
-        };
-        _restClient = new RestClient(options);
-    }
-
-    public async Task<NamiDataWrapper> GetAllNamiMembersOfGrouping(string groupingId)
-    {
-        var request = new RestRequest(NamiApiEndpoints.AllMembersOfGrouping(groupingId));
-        
-        var response = await _restClient.ExecuteAsync(request);
-        
-        if (!response.IsSuccessful) throw new Exception(response.ErrorMessage);
-
-        var result = response.Content == null ? null : JsonSerializer.Deserialize<NamiDataWrapper>(response.Content);
-
-        if (result != null)
-        {
-            return result.ResponseType switch
+            CookieContainer cookieContainer = new();
+            RestClientOptions options = new("https://nami.dpsg.de")
             {
-                "OK" => result,
-                "ERROR" => throw new NamiSessionExpiredException(),
-                "EXCEPTION" => throw new NamiAccessViolationException(),
-                _ => throw new NamiException(
-                    $"Unhandled responseType: {result.ResponseType}. Message: {response.ErrorMessage}")
+                CookieContainer = cookieContainer,
+                FollowRedirects = false,
+                Authenticator = new NamiAuthenticator(memberId, password, cookieContainer)
             };
+            _restClient = new RestClient(options);
         }
 
-        throw new NamiException("Content of request was null.");
-    }
+        public void Dispose()
+        {
+            _restClient.Dispose();
+        }
 
-    public void Dispose()
-    {
-        _restClient.Dispose();
+        public async Task<NamiDataWrapper> GetAllNamiMembersOfGrouping(string groupingId)
+        {
+            RestRequest request = new(NamiApiEndpoints.AllMembersOfGrouping(groupingId));
+
+            RestResponse response = await _restClient.ExecuteAsync(request);
+
+            if (!response.IsSuccessful)
+            {
+                throw new Exception(response.ErrorMessage);
+            }
+
+            NamiDataWrapper? result = response.Content == null
+                ? null
+                : JsonSerializer.Deserialize<NamiDataWrapper>(response.Content);
+
+            if (result != null)
+            {
+                return result.ResponseType switch
+                {
+                    "OK" => result,
+                    "ERROR" => throw new NamiSessionExpiredException(),
+                    "EXCEPTION" => throw new NamiAccessViolationException(
+                        "Benutzer hat keine Berechtigungen für die Gruppierung."),
+                    _ => throw new NamiException(
+                        $"Unhandled responseType: {result.ResponseType}. Message: {response.ErrorMessage}")
+                };
+            }
+
+            throw new NamiException("Content of request was null.");
+        }
     }
 }

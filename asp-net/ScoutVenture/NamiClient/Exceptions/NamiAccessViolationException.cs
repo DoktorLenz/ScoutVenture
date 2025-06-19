@@ -1,6 +1,4 @@
-﻿using System.Security.Authentication;
-
-namespace NamiClient.Exceptions
+﻿namespace NamiClient.Exceptions
 {
-    public class NamiAccessViolationException : Exception;
+    public class NamiAccessViolationException(string message) : Exception(message);
 }

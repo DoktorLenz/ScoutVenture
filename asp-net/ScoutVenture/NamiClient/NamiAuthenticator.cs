@@ -43,8 +43,7 @@ namespace NamiClient
                         JsonSerializer.Deserialize<NamiErrorWrapper>(loginResponse.Content!);
                     if (responseContent != null)
                     {
-                        throw new NamiAuthenticationException(
-                            $"Failed to authenticate. StatusCode \"{responseContent.StatusCode}\": {responseContent.StatusMessage}");
+                        throw new NamiAuthenticationException(responseContent.StatusMessage);
                     }
 
                     throw new NamiException("Unknown error: HttpStatusCode 200 OK");
