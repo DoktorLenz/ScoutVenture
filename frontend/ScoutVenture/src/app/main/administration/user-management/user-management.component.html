@@ -1,14 +1,16 @@
 <div class="sv-card">
   <p-table
     #table
+    class="w-full"
     [value]="users()"
     [scrollable]="true"
     scrollDirection="vertical"
     scrollHeight="flex"
-    class="w-full"
     [size]="'small'"
-    selectionMode="single"
     [globalFilterFields]="['firstName', 'lastName', 'email']"
+    selectionMode="single"
+    [(selection)]="selectedUser"
+    (onRowSelect)="gotoUserDetails($event.data)"
   >
     <ng-template #caption>
       <div
@@ -32,7 +34,7 @@
       </div>
     </ng-template>
     <ng-template #body let-user>
-      <tr>
+      <tr [pSelectableRow]="user">
         <td>
           <div class="flex flex-row align-items-center">
             <p-avatar

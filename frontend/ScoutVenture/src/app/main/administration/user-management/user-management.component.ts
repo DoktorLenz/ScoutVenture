@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, computed, signal, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
@@ -36,8 +37,12 @@ export class UserManagementComponent {
   );
   protected users = signal<User[]>([]);
   protected loading = signal(true);
+  protected selectedUser: User | null = null;
 
-  constructor(private readonly http: HttpClient) {
+  constructor(
+    private readonly http: HttpClient,
+    private readonly router: Router
+  ) {
     this.fetchUsers();
   }
 
@@ -226,8 +231,14 @@ export class UserManagementComponent {
       });
   }
 
-  search(event: Event) {
+  protected search(event: Event): void {
     var t = event.target as HTMLInputElement;
     this.table.filterGlobal(t.value, 'contains');
+  }
+
+  protected gotoUserDetails(user: User | User[] | undefined): void {
+    if (user && !Array.isArray(user)) {
+      this.router.navigate([`/administration/user-management/${user.id}`]);
+    }
   }
 }
