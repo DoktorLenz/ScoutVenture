@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ScoutVenture.PostgresAdapter.Entities;
 
 namespace ScoutVenture.PostgresAdapter
 {
     public class PostgresApplicationDbContext(DbContextOptions<PostgresApplicationDbContext> options)
-        : IdentityDbContext<IdentityUser>(options)
+        : IdentityDbContext<UserDpo>(options)
     {
-        public DbSet<MemberDto> Members { get; set; }
+        public DbSet<MemberDpo> Members { get; set; }
     }
 }
