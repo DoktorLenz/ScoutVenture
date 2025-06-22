@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace ScoutVenture.PostgresAdapter.Entities
 {
@@ -6,5 +6,7 @@ namespace ScoutVenture.PostgresAdapter.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public List<UserMemberLinkDpo> MemberLinks { get; set; } = [];
     }
 }
