@@ -3,7 +3,7 @@ using ScoutVenture.CoreContracts.Member;
 
 namespace ScoutVenture.PostgresAdapter.Entities
 {
-    public class MemberDto
+    public class MemberDpo
     {
         [Key] public required long MemberId { get; set; }
 
@@ -19,9 +19,9 @@ namespace ScoutVenture.PostgresAdapter.Entities
 
         [Timestamp] public uint Version { get; set; }
 
-        public static MemberDto FromDo(Member member)
+        public static MemberDpo FromDo(Member member)
         {
-            return new MemberDto
+            return new MemberDpo
             {
                 MemberId = member.MemberId,
                 FirstName = member.FirstName,

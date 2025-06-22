@@ -15,12 +15,12 @@ namespace ScoutVenture.PostgresAdapter
             await context.Members.Where(m => !importMemberIds.Contains(m.MemberId))
                 .ExecuteDeleteAsync(cancellationToken);
 
-            List<MemberDto> existingMembers = await context.Members.ToListAsync(cancellationToken);
+            List<MemberDpo> existingMembers = await context.Members.ToListAsync(cancellationToken);
 
-            List<MemberDto> newMembers = [];
+            List<MemberDpo> newMembers = [];
             foreach (Member import in importMembers)
             {
-                MemberDto? existing = existingMembers.FirstOrDefault(m => m.MemberId == import.MemberId);
+                MemberDpo? existing = existingMembers.FirstOrDefault(m => m.MemberId == import.MemberId);
                 if (existing != null)
                 {
                     // Update properties
@@ -28,7 +28,7 @@ namespace ScoutVenture.PostgresAdapter
                 }
                 else
                 {
-                    newMembers.Add(MemberDto.FromDo(import));
+                    newMembers.Add(MemberDpo.FromDo(import));
                 }
             }
 
