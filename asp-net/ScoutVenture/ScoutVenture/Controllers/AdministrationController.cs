@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ScoutVenture.CoreContracts.Member;
+using ScoutVenture.CoreContracts.User;
 using ScoutVenture.Models;
 
 namespace ScoutVenture.Controllers
@@ -8,7 +9,7 @@ namespace ScoutVenture.Controllers
     [ApiController]
     [Route("administration")]
     [Authorize]
-    public class AdministrationController(IMemberService memberService) : Controller
+    public class AdministrationController(IMemberService memberService, IUserService userService) : Controller
     {
         [HttpGet("nami/overview")]
         public async Task<ActionResult<MemberOverviewDto>> Overview()
@@ -36,9 +37,10 @@ namespace ScoutVenture.Controllers
         }
 
         [HttpGet("user-management/users")]
-        public async Task<IActionResult> UserList()
+        public async Task<ActionResult<List<UserListItemDto>>> UserList()
         {
-            return Ok();
+            List<UserListItem> list = await userService.GetUserList();
+            return list.Select(UserListItemDto.FromDomainObject).ToList();
         }
     }
 }

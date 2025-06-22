@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ScoutVenture.CoreContracts;
 using ScoutVenture.CoreContracts.Member;
+using ScoutVenture.CoreContracts.User;
 
 namespace ScoutVenture.PostgresAdapter
 {
@@ -24,6 +25,7 @@ namespace ScoutVenture.PostgresAdapter
             );
             builder.Services.AddScoped<ITransactionManager, TransactionManager>();
             builder.Services.AddTransient<IMemberRepository, MemberRepository>();
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
             return builder;
         }
 

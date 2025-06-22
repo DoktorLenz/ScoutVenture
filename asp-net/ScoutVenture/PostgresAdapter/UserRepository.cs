@@ -14,6 +14,14 @@ namespace ScoutVenture.PostgresAdapter
             return user.ToDomainObject();
         }
 
+        public Task<List<UserListItem>> GetUserList()
+        {
+            return dbContext.UserList
+                .AsNoTracking()
+                .Select(i => i.ToDomainObject())
+                .ToListAsync();
+        }
+
         public async Task<bool> LinkMemberToUser(string userId, long memberId, string createdById,
             CancellationToken cancellationToken = default)
         {

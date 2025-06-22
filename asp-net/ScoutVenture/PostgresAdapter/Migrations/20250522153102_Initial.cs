@@ -216,7 +216,7 @@ namespace ScoutVenture.PostgresAdapter.Migrations
                     "SecurityStamp", 
                     "ConcurrencyStamp", 
                     "PhoneNumberConfirmed", "TwoFactorEnabled",
-                    "LockoutEnabled", "AccessFailedCount"],
+                    "LockoutEnabled", "AccessFailedCount", "FirstName", "LastName"],
                 values: ["c35ec560-c77f-471a-926a-029750e3f921",
                     "admin@scoutventure", "ADMIN@SCOUTVENTURE", 
                     "admin@scoutventure", "ADMIN@SCOUTVENTURE",
@@ -225,7 +225,7 @@ namespace ScoutVenture.PostgresAdapter.Migrations
                     "REZXZ7HSMFYR5H46EIC6PNGZ4KDWRZGX",
                     "794b5403-e59b-4f0f-be2d-886c37eefa57", 
                     false, false,
-                    true, 0 ]);
+                    true, 0, "System", "Administrator" ]);
             
             // Make first user admin
             migrationBuilder.InsertData(
