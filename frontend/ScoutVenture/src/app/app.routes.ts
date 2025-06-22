@@ -7,6 +7,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { NamiComponent } from './main/administration/nami/nami.component';
 import { SettingsComponent } from './main/administration/settings/settings.component';
+import { UserDetailsComponent } from './main/administration/user-management/components/user-details/user-details.component';
 import { UserManagementComponent } from './main/administration/user-management/user-management.component';
 import { EventsOverviewComponent } from './main/events/events-overview/events-overview.component';
 import { EventsRegistrationsComponent } from './main/events/events-registrations/events-registrations.component';
@@ -78,9 +79,21 @@ const administrationRoutes: Route = {
   children: [
     {
       path: 'user-management',
-      component: UserManagementComponent,
-      title: 'Administration - Nutzerverwaltung',
-      data: { title: 'Administration - Nutzerverwaltung' },
+      children: [
+        {
+          path: '',
+          pathMatch: 'full',
+          component: UserManagementComponent,
+          title: 'Administration - Benutzerverwaltung',
+          data: { title: 'Administration - Benutzerverwaltung' },
+        },
+        {
+          path: ':id',
+          component: UserDetailsComponent,
+          title: 'Administration - Benutzerverwaltung - Details',
+          data: { title: 'Administration - Benutzerverwaltung - Details' },
+        },
+      ],
     },
     {
       path: 'nami',
