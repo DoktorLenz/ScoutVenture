@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using ScoutVenture.CoreContracts;
-using ScoutVenture.CoreContracts.Member;
+﻿using Microsoft.AspNetCore.Identity;
 using ScoutVenture.PostgresAdapter;
+using ScoutVenture.PostgresAdapter.Entities;
 using SmtpAdapter;
 
 namespace ScoutVenture.Extensions
@@ -13,7 +10,7 @@ namespace ScoutVenture.Extensions
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
-            services.AddIdentityCore<IdentityUser>(options =>
+            services.AddIdentityCore<UserDpo>(options =>
                 {
                     options.SignIn.RequireConfirmedEmail = true;
                     options.User.RequireUniqueEmail = true;
@@ -26,9 +23,10 @@ namespace ScoutVenture.Extensions
                         RequiredUniqueChars = 0,
                         RequiredLength = 8
                     };
-                }).AddEntityFrameworkStores<PostgresApplicationDbContext>()
+                })
+                .AddEntityFrameworkStores<PostgresApplicationDbContext>()
                 .AddApiEndpoints();
-            services.AddTransient<IEmailSender<IdentityUser>, IdentityMailSender>();
+            services.AddTransient<IEmailSender<UserDpo>, IdentityMailSender>();
             services.AddAuthorization();
             return services;
         }

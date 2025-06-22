@@ -1,8 +1,8 @@
 using AppSettings;
-using Microsoft.AspNetCore.Identity;
 using ScoutVenture.Core;
 using ScoutVenture.Extensions;
 using ScoutVenture.PostgresAdapter;
+using ScoutVenture.PostgresAdapter.Entities;
 
 namespace ScoutVenture
 {
@@ -56,7 +56,7 @@ namespace ScoutVenture
             app.UseAuthorization();
 
             app.MapControllers();
-            app.MapIdentityApi<IdentityUser>();
+            app.MapIdentityApi<UserDpo>();
 
             app.Run();
         }
