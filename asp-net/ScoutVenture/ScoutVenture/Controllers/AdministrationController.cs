@@ -34,5 +34,11 @@ namespace ScoutVenture.Controllers
                 namiCredentials.GroupingId);
             return Ok();
         }
+
+        [HttpGet("user-management/users")]
+        public async Task<IActionResult> UserList()
+        {
+            return Ok();
+        }
     }
 }

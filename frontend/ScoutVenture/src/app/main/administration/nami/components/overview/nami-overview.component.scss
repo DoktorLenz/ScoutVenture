@@ -5,12 +5,7 @@
 }
 
 .rank-card {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  background-color: var(--p-surface-0);
-  border-radius: 8px;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  padding: 0;
 }
 
 .rank-icon {

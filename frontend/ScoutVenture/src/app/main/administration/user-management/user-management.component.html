@@ -1,1 +1,54 @@
-<p>user-management works!</p>
+<div class="sv-card">
+  <p-table
+    #table
+    [value]="users()"
+    [scrollable]="true"
+    scrollDirection="vertical"
+    scrollHeight="flex"
+    class="w-full"
+    [size]="'small'"
+    selectionMode="single"
+    [globalFilterFields]="['firstName', 'lastName', 'email']"
+  >
+    <ng-template #caption>
+      <div
+        class="flex flex-column-reverse md:flex-row md:align-items-center md:justify-content-between"
+      >
+        <span class="text-sm mt-1 md:mt-0"
+          >Eintrag anklicken, um Details zu sehen</span
+        >
+        <p-iconfield iconPosition="left" class="w-full md:w-6">
+          <p-inputicon>
+            <i class="pi pi-search"></i>
+          </p-inputicon>
+          <input
+            class="w-full"
+            pInputText
+            type="text"
+            placeholder="Suche"
+            (input)="search($event)"
+          />
+        </p-iconfield>
+      </div>
+    </ng-template>
+    <ng-template #body let-user>
+      <tr>
+        <td>
+          <div class="flex flex-row align-items-center">
+            <p-avatar
+              shape="circle"
+              class="mr-2 flex-none"
+              [label]="user.firstName[0] + user.lastName[0]"
+            ></p-avatar>
+            <div class="flex flex-column">
+              <span class="font-bold"
+                >{{ user.firstName }} {{ user.lastName }}</span
+              >
+              <span class="text-sm">{{ user.email }}</span>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
