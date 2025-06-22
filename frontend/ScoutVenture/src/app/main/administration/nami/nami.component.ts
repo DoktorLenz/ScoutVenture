@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '../../../shared/form/Validators';
-import { NamiImportComponent } from './import/nami-import.component';
-import { NamiOverviewComponent } from './overview/nami-overview.component';
+import { NamiImportComponent } from './components/import/nami-import.component';
+import { NamiOverviewComponent } from './components/overview/nami-overview.component';
 
 @Component({
   selector: 'sv-nami',

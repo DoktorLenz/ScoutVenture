@@ -10,10 +10,10 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import { ProblemDetails } from '../../../../shared/error/ProblemDetails';
-import { ErrorSummaryComponent } from '../../../../shared/form/error-summary/error-summary.component';
-import { ErrorWrapperComponent } from '../../../../shared/form/error-wrapper/error-wrapper.component';
-import { NamiService } from '../nami.service';
+import { ProblemDetails } from '../../../../../shared/error/ProblemDetails';
+import { ErrorSummaryComponent } from '../../../../../shared/form/error-summary/error-summary.component';
+import { ErrorWrapperComponent } from '../../../../../shared/form/error-wrapper/error-wrapper.component';
+import { NamiService } from '../../services/nami.service';
 
 @Component({
   selector: 'sv-nami-import',

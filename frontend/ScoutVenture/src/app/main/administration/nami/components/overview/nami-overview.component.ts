@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, effect } from '@angular/core';
 import { SkeletonModule } from 'primeng/skeleton';
-import { NamiService } from '../nami.service';
+import { NamiService } from '../../services/nami.service';
 
 @Component({
   selector: 'sv-nami-overview',
