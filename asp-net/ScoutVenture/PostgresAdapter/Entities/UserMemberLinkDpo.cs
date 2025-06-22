@@ -3,13 +3,13 @@
     public class UserMemberLinkDpo
     {
         public required string UserId { get; set; }
-        public required UserDpo User { get; set; }
+        public UserDpo User { get; set; }
         
         public long MemberId { get; set; }
-        public required MemberDpo Member { get; set; }
+        public MemberDpo Member { get; set; }
         
         public required string CreatedById { get; set; }
-        public required UserDpo CreatedBy { get; set; }
+        public UserDpo CreatedBy { get; set; }
         public required DateTime CreatedDate { get; set; } = DateTime.UtcNow;
     }
 }

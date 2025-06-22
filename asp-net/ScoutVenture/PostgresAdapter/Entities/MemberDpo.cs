@@ -19,7 +19,7 @@ namespace ScoutVenture.PostgresAdapter.Entities
 
         [Timestamp] public uint Version { get; set; }
 
-        public static MemberDpo FromDo(Member member)
+        public static MemberDpo FromDomainObject(Member member)
         {
             return new MemberDpo
             {
@@ -29,6 +29,19 @@ namespace ScoutVenture.PostgresAdapter.Entities
                 DateOfBirth = member.DateOfBirth,
                 Rank = member.Rank,
                 Gender = member.Gender
+            };
+        }
+
+        public Member ToDomainObject()
+        {
+            return new Member
+            {
+                MemberId = MemberId,
+                FirstName = FirstName,
+                LastName = LastName,
+                DateOfBirth = DateOfBirth,
+                Rank = Rank,
+                Gender = Gender
             };
         }
 

@@ -28,7 +28,7 @@ namespace ScoutVenture.PostgresAdapter
                 }
                 else
                 {
-                    newMembers.Add(MemberDpo.FromDo(import));
+                    newMembers.Add(MemberDpo.FromDomainObject(import));
                 }
             }
 
