@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using NamiClient.Exceptions;
+using ScoutVenture.CoreContracts.Exceptions;
 
 namespace ScoutVenture
 {
@@ -17,6 +18,9 @@ namespace ScoutVenture
                     break;
                 case NamiAccessViolationException:
                     problemDetails = ProblemDetails.New(exception.Message, StatusCodes.Status403Forbidden);
+                    break;
+                case ConfirmationCodeException ex:
+                    problemDetails = ProblemDetails.New(ex.PublicMessage, StatusCodes.Status400BadRequest);
                     break;
                 default:
                     logger.LogError(exception, exception.Message);

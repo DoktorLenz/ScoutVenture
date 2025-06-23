@@ -11,5 +11,17 @@ namespace ScoutVenture.Core
                 userRepository.GetUserList,
                 cancellationToken);
         }
+
+        public async Task SetPersonalData(string userId, PersonalData personalData,
+            CancellationToken cancellationToken = default)
+        {
+            await transactionManager.ExecuteAsync(
+                async () =>
+                {
+                    User user = await userRepository.GetUserById(userId, cancellationToken);
+                    user.FirstName = personalData.FirstName;
+                    user.LastName = personalData.LastName;
+                }, cancellationToken);
+        }
     }
 }
