@@ -6,13 +6,18 @@
   >
     <p-card>
       <ng-template #title>ScoutVenture</ng-template>
-      @if(!confirmationSuccess){
-      <ng-template #subtitle>Persönliche Daten ergänzen</ng-template>
-      }
+
+      <ng-template #subtitle>
+        @if(!confirmationSuccess){ Persönliche Daten ergänzen } @else
+        {Registrierung abgeschlossen}
+      </ng-template>
 
       <ng-template #content>
         @if(confirmationSuccess) {
-        <p>Du hast deine E-Mail Adresse erfolgreich bestätigt.</p>
+        <p>
+          Du hast deine E-Mail Adresse erfolgreich bestätigt. Kehre jetzt zum
+          Login zurück.
+        </p>
         } @else {
         <div class="flex flex-column gap-3">
           <sv-error-wrapper
@@ -79,7 +84,14 @@
           class="w-full flex flex-row align-items-center justify-content-between"
           fluid
         >
+          @if(!confirmationSuccess) {
           <p-button label="Registrierung bestätigen" type="submit"></p-button>
+          } @else {
+          <p-button
+            label="Zurück zum Login"
+            routerLink="/auth/login"
+          ></p-button>
+          }
         </div>
       </ng-template>
     </p-card>
