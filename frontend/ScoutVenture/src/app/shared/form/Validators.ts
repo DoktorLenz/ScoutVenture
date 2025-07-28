@@ -27,6 +27,23 @@ export class Validators {
     };
   }
 
+  static phoneNumber(): ValidatorFn {
+    return (control) => {
+      const value = control.value;
+
+      if (!value) {
+        return null; // allow empty value; use `Validators.required` if needed
+      }
+
+      // Permissive regex for phone numbers
+      const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s./0-9]*$/;
+
+      return phoneRegex.test(value)
+        ? null
+        : { invalidPhoneNumber: { value: control.value } };
+    };
+  }
+
   static passwordMatch(
     passwordControlName: string,
     confirmPasswordControlName: string

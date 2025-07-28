@@ -30,6 +30,9 @@ export class ValidationMessagePipe implements PipeTransform {
     if (errors['invalidCredentials']) {
       errorMessages.push('E-Mail-Adresse oder Passwort falsch');
     }
+    if (errors['invalidPhoneNumber']) {
+      errorMessages.push('Ungültige Telefonnummer');
+    }
     if (errors['custom']) {
       errorMessages.push(errors['custom']);
     }

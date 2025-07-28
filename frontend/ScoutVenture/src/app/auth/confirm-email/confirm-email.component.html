@@ -1,29 +1,89 @@
 <div class="flex flex-column justify-content-center align-items-center">
-  <p-card class="w-full md:w-25rem">
-    <ng-template #title>ScoutVenture</ng-template>
-    <ng-template #content>
-      @if(confirmationSuccess) {
-      <p>Du hast deine E-Mail Adresse erfolgreich bestätigt.</p>
-      } @else {
-      <p>
-        Deine E-Mail Adresse konnte nicht bestätigt werden. Bitte versuche es
-        später nochmal.
-      </p>
+  <form
+    class="w-full md:w-25rem"
+    [formGroup]="emailConfirmationForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <p-card>
+      <ng-template #title>ScoutVenture</ng-template>
+      @if(!confirmationSuccess){
+      <ng-template #subtitle>Persönliche Daten ergänzen</ng-template>
       }
-    </ng-template>
-    <ng-template #footer>
-      <div
-        class="w-full flex flex-row align-items-center justify-content-between"
-        fluid
-      >
-        <p-button
-          label="Zurück zum Login"
-          (onClick)="redirectLogin()"
-        ></p-button>
-      </div>
-    </ng-template>
-  </p-card>
 
+      <ng-template #content>
+        @if(confirmationSuccess) {
+        <p>Du hast deine E-Mail Adresse erfolgreich bestätigt.</p>
+        } @else {
+        <div class="flex flex-column gap-3">
+          <sv-error-wrapper
+            [control]="emailConfirmationForm.controls.firstName"
+          >
+            <ng-template #title>
+              <label class="font-bold" for="firstName">Vorname</label>
+            </ng-template>
+            <ng-template #input>
+              <input
+                pInputText
+                id="firstName"
+                type="text"
+                fluid
+                autocomplete="given-name"
+                inputmode="text"
+                formControlName="firstName"
+              />
+            </ng-template>
+          </sv-error-wrapper>
+          <sv-error-wrapper [control]="emailConfirmationForm.controls.lastName">
+            <ng-template #title>
+              <label class="font-bold" for="firstName">Nachname</label>
+            </ng-template>
+            <ng-template #input>
+              <input
+                pInputText
+                id="lastName"
+                type="text"
+                fluid
+                autocomplete="family-name"
+                inputmode="text"
+                formControlName="lastName"
+              />
+            </ng-template>
+          </sv-error-wrapper>
+          <sv-error-wrapper
+            [control]="emailConfirmationForm.controls.phoneNumber"
+          >
+            <ng-template #title>
+              <label class="font-bold" for="phoneNumber">Telefonnummer</label>
+            </ng-template>
+            <ng-template #input>
+              <input
+                pInputText
+                id="phoneNumber"
+                type="text"
+                fluid
+                autocomplete="tel"
+                inputmode="tel"
+                formControlName="phoneNumber"
+              />
+            </ng-template>
+          </sv-error-wrapper>
+
+          @if(emailConfirmationForm.errors) {
+          <sv-error-summary [group]="emailConfirmationForm"></sv-error-summary>
+          }
+        </div>
+        }
+      </ng-template>
+      <ng-template #footer>
+        <div
+          class="w-full flex flex-row align-items-center justify-content-between"
+          fluid
+        >
+          <p-button label="Registrierung bestätigen" type="submit"></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+  </form>
   <div class="flex gap-4 mt-1">
     <a class="secondary-link" routerLink="/public/imprint">Impressum</a>
     <a class="secondary-link" routerLink="/public/privacy-policy">
