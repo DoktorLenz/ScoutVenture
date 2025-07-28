@@ -17,6 +17,7 @@ import { ImprintComponent } from './public/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './public/privacy-policy/privacy-policy.component';
 import { antiAuthGuard } from './shared/guards/anti-auth.guard';
 import { authGuard } from './shared/guards/auth.guard';
+import { adminGuard } from './shared/guards/admin.guard';
 
 const authRoute: Route = {
   path: 'auth',
@@ -76,6 +77,7 @@ const eventsRoutes: Route = {
 
 const administrationRoutes: Route = {
   path: 'administration',
+  canActivate: [adminGuard],
   children: [
     {
       path: 'user-management',

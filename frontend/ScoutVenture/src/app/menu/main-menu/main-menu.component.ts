@@ -6,6 +6,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'sv-main-menu',
@@ -19,8 +20,23 @@ export class MainMenuComponent implements OnInit {
 
   items: MenuItem[] | undefined;
 
+  constructor(
+    private readonly http: HttpClient,
+    private readonly userService: UserService
+  ) {}
+
   public ngOnInit() {
-    this.items = [
+    this.loadUserInfoAndBuildMenu();
+  }
+
+  private loadUserInfoAndBuildMenu(): void {
+    this.userService.loadUserInfo().subscribe(() => {
+      this.buildMenu();
+    });
+  }
+
+  private buildMenu(): void {
+    const menuItems: MenuItem[] = [
       {
         label: 'Veranstaltungen',
         items: [
@@ -52,31 +68,37 @@ export class MainMenuComponent implements OnInit {
           },
         ],
       },
-      { separator: true },
-      {
-        label: 'Administration',
-        items: [
-          {
-            label: 'Nutzerverwaltung',
-            icon: 'pi pi-user',
-            routerLink: '/administration/user-management',
-          },
-          {
-            label: 'NaMi',
-            icon: 'pi pi-link',
-            routerLink: '/administration/nami',
-          },
-          {
-            label: 'Einstellungen',
-            icon: 'pi pi-cog',
-            routerLink: '/administration/settings',
-          },
-        ],
-      },
     ];
-  }
 
-  constructor(private readonly http: HttpClient) {}
+    // Only add administration menu if user is admin
+    if (this.userService.isAdmin()) {
+      menuItems.push(
+        { separator: true },
+        {
+          label: 'Administration',
+          items: [
+            {
+              label: 'Nutzerverwaltung',
+              icon: 'pi pi-user',
+              routerLink: '/administration/user-management',
+            },
+            {
+              label: 'NaMi',
+              icon: 'pi pi-link',
+              routerLink: '/administration/nami',
+            },
+            {
+              label: 'Einstellungen',
+              icon: 'pi pi-cog',
+              routerLink: '/administration/settings',
+            },
+          ],
+        }
+      );
+    }
+
+    this.items = menuItems;
+  }
 
   protected logout(): void {
     this.http.post('/api/logout', {}).subscribe({
