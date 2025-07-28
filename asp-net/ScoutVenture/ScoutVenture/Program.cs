@@ -1,6 +1,7 @@
 using AppSettings;
 using ScoutVenture.Core;
 using ScoutVenture.Extensions;
+using ScoutVenture.Middleware;
 using ScoutVenture.PostgresAdapter;
 using ScoutVenture.PostgresAdapter.Entities;
 
@@ -26,6 +27,9 @@ namespace ScoutVenture
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Add security headers
+            builder.Services.AddSecurityHeaders(builder.Configuration, builder.Environment);
 
             // Add CORS
             builder.Services.AddCors(options =>
@@ -120,6 +124,9 @@ namespace ScoutVenture
             app.ApplyPostgresMigrations();
             app.UseExceptionHandler();
             app.UseHttpsRedirection();
+
+            // Add security headers early in pipeline
+            app.UseSecurityHeaders();
 
             app.UseRouting();
             app.UsePathBase("/api");
