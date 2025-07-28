@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ScoutVenture.Constants;
 using ScoutVenture.CoreContracts.Member;
 using ScoutVenture.CoreContracts.User;
 using ScoutVenture.Models;
@@ -8,7 +9,7 @@ namespace ScoutVenture.Controllers
 {
     [ApiController]
     [Route("administration")]
-    [Authorize]
+    [Authorize(Roles = Roles.Admin)]
     public class AdministrationController(IMemberService memberService, IUserService userService) : Controller
     {
         [HttpGet("nami/overview")]

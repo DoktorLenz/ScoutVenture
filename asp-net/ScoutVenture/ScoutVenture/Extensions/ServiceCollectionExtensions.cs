@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using ScoutVenture.Constants;
 using ScoutVenture.PostgresAdapter;
 using ScoutVenture.PostgresAdapter.Entities;
 using SmtpAdapter;
@@ -9,8 +10,7 @@ namespace ScoutVenture.Extensions
     {
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
-            services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
-            services.AddIdentityCore<UserDpo>(options =>
+            services.AddIdentity<UserDpo, IdentityRole>(options =>
                 {
                     options.SignIn.RequireConfirmedEmail = true;
                     options.User.RequireUniqueEmail = true;
@@ -26,8 +26,16 @@ namespace ScoutVenture.Extensions
                 })
                 .AddEntityFrameworkStores<PostgresApplicationDbContext>()
                 .AddApiEndpoints();
+
             services.AddTransient<IEmailSender<UserDpo>, IdentityMailSender>();
-            services.AddAuthorization();
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(Roles.Admin));
+                options.AddPolicy("CounselorOrAbove", policy => policy.RequireRole(Roles.Admin, Roles.Counselor));
+                options.AddPolicy("MemberOrAbove", policy => policy.RequireRole(Roles.Admin, Roles.Counselor, Roles.Member));
+            });
+            
             return services;
         }
     }
