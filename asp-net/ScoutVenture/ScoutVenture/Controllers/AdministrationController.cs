@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using ScoutVenture.Constants;
 using ScoutVenture.CoreContracts.Member;
 using ScoutVenture.CoreContracts.User;
@@ -10,6 +11,7 @@ namespace ScoutVenture.Controllers
     [ApiController]
     [Route("administration")]
     [Authorize(Roles = Roles.Admin)]
+    [EnableRateLimiting("AdminPolicy")]
     public class AdministrationController(IMemberService memberService, IUserService userService) : Controller
     {
         [HttpGet("nami/overview")]

@@ -27,6 +27,50 @@ namespace ScoutVenture
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Add rate limiting
+            builder.Services.AddRateLimiter(options =>
+            {
+                // Global rate limiting - 100 requests per minute per IP
+                options.GlobalLimiter = System.Threading.RateLimiting.PartitionedRateLimiter.Create<HttpContext, string>(
+                    httpContext => System.Threading.RateLimiting.RateLimitPartition.GetFixedWindowLimiter(
+                        partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+                        factory: partition => new System.Threading.RateLimiting.FixedWindowRateLimiterOptions
+                        {
+                            AutoReplenishment = true,
+                            PermitLimit = 100,
+                            Window = TimeSpan.FromMinutes(1)
+                        }));
+
+                // Authentication endpoints - stricter limits (5 attempts per minute per IP)
+                options.AddPolicy("AuthPolicy", httpContext =>
+                    System.Threading.RateLimiting.RateLimitPartition.GetFixedWindowLimiter(
+                        partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+                        factory: partition => new System.Threading.RateLimiting.FixedWindowRateLimiterOptions
+                        {
+                            AutoReplenishment = true,
+                            PermitLimit = 5,
+                            Window = TimeSpan.FromMinutes(1)
+                        }));
+
+                // Admin endpoints - moderate limits (20 requests per minute per IP)
+                options.AddPolicy("AdminPolicy", httpContext =>
+                    System.Threading.RateLimiting.RateLimitPartition.GetFixedWindowLimiter(
+                        partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+                        factory: partition => new System.Threading.RateLimiting.FixedWindowRateLimiterOptions
+                        {
+                            AutoReplenishment = true,
+                            PermitLimit = 20,
+                            Window = TimeSpan.FromMinutes(1)
+                        }));
+
+                // Rejection response
+                options.OnRejected = async (context, token) =>
+                {
+                    context.HttpContext.Response.StatusCode = 429;
+                    await context.HttpContext.Response.WriteAsync("Too many requests. Please try again later.", cancellationToken: token);
+                };
+            });
+
             builder.AddPostgres();
 
             builder.AddServices();
@@ -52,11 +96,12 @@ namespace ScoutVenture
             app.UseRouting();
             app.UsePathBase("/api");
 
+            app.UseRateLimiter();
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
-            app.MapIdentityApi<UserDpo>();
+            app.MapIdentityApi<UserDpo>().RequireRateLimiting("AuthPolicy");
 
             app.Run();
         }

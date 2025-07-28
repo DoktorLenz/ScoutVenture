@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using ScoutVenture.CoreContracts.Exceptions;
 using ScoutVenture.Models;
 using ScoutVenture.PostgresAdapter.Entities;
@@ -8,6 +9,7 @@ namespace ScoutVenture.Controllers
 {
     [ApiController]
     [Route("auth")]
+    [EnableRateLimiting("AuthPolicy")]
     public class AuthController(UserManager<UserDpo> userManager) : ControllerBase
     {
         [HttpPost("confirmEmail")]
