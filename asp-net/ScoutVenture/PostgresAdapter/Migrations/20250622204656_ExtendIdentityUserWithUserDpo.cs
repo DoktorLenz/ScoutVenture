@@ -23,6 +23,13 @@ namespace ScoutVenture.PostgresAdapter.Migrations
                 type: "text",
                 nullable: false,
                 defaultValue: "");
+
+            // Update the admin user with proper names
+            migrationBuilder.Sql(@"
+                UPDATE ""AspNetUsers"" 
+                SET ""FirstName"" = 'System', ""LastName"" = 'Administrator'
+                WHERE ""Id"" = '9fe88cee-9635-41be-988f-1cb08cd30a1d';
+            ");
         }
 
         /// <inheritdoc />

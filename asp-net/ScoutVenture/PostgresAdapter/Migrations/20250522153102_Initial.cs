@@ -194,16 +194,6 @@ namespace ScoutVenture.PostgresAdapter.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            // Add roles
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: ["Id", "Name", "NormalizedName"],
-                values: new object[,]
-                {
-                    {"9fe88cee-9635-41be-988f-1cb08cd30a1d", "Admin", "ADMIN"},
-                    {"ee360240-3f6c-4342-a627-cbe0b514d7b6","User", "USER"}
-                });
             
             // Add first user
             migrationBuilder.InsertData(
@@ -216,8 +206,8 @@ namespace ScoutVenture.PostgresAdapter.Migrations
                     "SecurityStamp", 
                     "ConcurrencyStamp", 
                     "PhoneNumberConfirmed", "TwoFactorEnabled",
-                    "LockoutEnabled", "AccessFailedCount", "FirstName", "LastName"],
-                values: ["c35ec560-c77f-471a-926a-029750e3f921",
+                    "LockoutEnabled", "AccessFailedCount"],
+                values: ["9fe88cee-9635-41be-988f-1cb08cd30a1d",
                     "admin@scoutventure", "ADMIN@SCOUTVENTURE", 
                     "admin@scoutventure", "ADMIN@SCOUTVENTURE",
                     true, 
@@ -225,17 +215,7 @@ namespace ScoutVenture.PostgresAdapter.Migrations
                     "REZXZ7HSMFYR5H46EIC6PNGZ4KDWRZGX",
                     "794b5403-e59b-4f0f-be2d-886c37eefa57", 
                     false, false,
-                    true, 0, "System", "Administrator" ]);
-            
-            // Make first user admin
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: ["UserId", "RoleId" ],
-                values: new object[,]
-                {
-                    {"c35ec560-c77f-471a-926a-029750e3f921", "9fe88cee-9635-41be-988f-1cb08cd30a1d"},
-                    {"c35ec560-c77f-471a-926a-029750e3f921", "ee360240-3f6c-4342-a627-cbe0b514d7b6"}
-                });
+                    true, 0 ]);
         }
 
         /// <inheritdoc />
