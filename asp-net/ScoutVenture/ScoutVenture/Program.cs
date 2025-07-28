@@ -27,6 +27,34 @@ namespace ScoutVenture
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Add CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("DevelopmentCors", policy =>
+                {
+                    policy.WithOrigins(
+                        "http://localhost:4200",   // Angular dev server default
+                        "https://localhost:4200",  // Angular dev server with HTTPS
+                        "http://localhost:80",     // Traefik proxy
+                        "https://localhost:80"     // Traefik proxy with HTTPS
+                    )
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+                });
+
+                options.AddPolicy("ProductionCors", policy =>
+                {
+                    var hostInfo = builder.Configuration.GetSection(HostInformation.HostInformationKey).Get<HostInformation>();
+                    var baseUrl = hostInfo?.BaseUrl ?? "https://localhost";
+                    
+                    policy.WithOrigins(baseUrl)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+                });
+            });
+
             // Add rate limiting
             builder.Services.AddRateLimiter(options =>
             {
@@ -95,6 +123,16 @@ namespace ScoutVenture
 
             app.UseRouting();
             app.UsePathBase("/api");
+
+            // Use CORS - environment-specific policy
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseCors("DevelopmentCors");
+            }
+            else
+            {
+                app.UseCors("ProductionCors");
+            }
 
             app.UseRateLimiter();
             app.UseAuthentication();
